@@ -6,6 +6,12 @@ interface ToDo {
   done: boolean,
 }
 
-type ToDoState = {
+interface ToDoState {
   tasks: ToDo[]
 }
+
+interface ToDoAction {
+  type: string,
+  payload: ToDo
+}
+

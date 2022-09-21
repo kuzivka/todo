@@ -2,12 +2,11 @@ import { useStore } from 'react-redux';
 
 
 function App() {
+
   const store = useStore();
 
-  console.log(store);
-
   return (
-    <div className="App" style={{textAlign: 'center'}}>
+    <div className='App' style={{textAlign: 'center'}}>
       <h1>To Do List</h1>
       <h2>add your tasks</h2>
     </div>
