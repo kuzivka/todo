@@ -1,5 +1,5 @@
-import { Selector } from "@reduxjs/toolkit";
-import { format } from "date-fns";
+import { Selector } from '@reduxjs/toolkit';
+import { format } from 'date-fns';
 
 interface TodoToShow {
   id: string;
@@ -14,7 +14,7 @@ export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
     return {
       id: task.id,
       task: task.task,
-      expiresAt: format(task.expiresAt, "d.L.yyyy H:mm"),
+      expiresAt: format(task.expiresAt, 'd.L.yyyy H:mm'),
     };
   });
 };

@@ -1,15 +1,15 @@
-import { useState, useCallback, ChangeEventHandler } from "react";
-import { useDispatch } from "react-redux";
-import { TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { addTodo } from "../actions/actionCreators";
-import { getNewTaskObject } from "../utils/getNewTaskObject";
-import { AddNewTodoModal } from "./AddNewTodoModal";
+import { useState, useCallback, ChangeEventHandler } from 'react';
+import { useDispatch } from 'react-redux';
+import { TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import { addTodo } from '../actions/actionCreators';
+import { getNewTaskObject } from '../utils/getNewTaskObject';
+import { AddNewTodoModal } from './AddNewTodoModal';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [taskValue, setTaskValue] = useState("");
+  const [taskValue, setTaskValue] = useState('');
   const dispatch = useDispatch();
 
   const handleModalOpen = useCallback(() => {
@@ -27,10 +27,10 @@ export default function TaskInput() {
 
   const enterClickHandler = useCallback(
     (event: any) => {
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
-        setTaskValue("");
+        setTaskValue('');
       }
     },
     [dispatch, taskValue]
@@ -39,16 +39,16 @@ export default function TaskInput() {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <TaskInputField
         value={taskValue}
         onChange={taskValueChangeHandler}
         color="primary"
-        inputProps={{ pattern: "[a-zA-Z0-9]+$" }}
+        inputProps={{ pattern: '[a-zA-Z0-9]+$' }}
         id="outlined-basic"
         label="Describe Your Task"
         variant="outlined"

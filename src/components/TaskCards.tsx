@@ -19,11 +19,7 @@ export default function TaskCards() {
             '&:last-child': { borderBottom: '1px solid #ddd' },
           }}
         >
-          <Checkbox
-            edge="start"
-            onChange={() => void 1}
-            checked={false}
-          />
+          <Checkbox edge="start" onChange={() => void 1} checked={false} />
           <ListItemText
             primary={task.task}
             secondary={`Expires at: ${task.expiresAt}`}

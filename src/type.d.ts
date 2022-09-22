@@ -6,7 +6,7 @@ interface ToDo {
   done: boolean;
 }
 
-type SortingOption = "task" | "createdAt";
+type SortingOption = 'task' | 'createdAt';
 
 interface ToDoState {
   tasks: ToDo[];

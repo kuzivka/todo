@@ -81,7 +81,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             }}
           />
         </LocalizationProvider>
-        <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button disabled={taskValue.trim() === ''} onClick={createNewTask}>
             save
           </Button>
