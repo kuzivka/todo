@@ -75,7 +75,6 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             value={expirationDate}
             onChange={(newValue: Date | null) => {
               if (newValue) {
-                console.log(newValue);
                 setExpirationDate(newValue);
               }
             }}

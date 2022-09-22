@@ -1,10 +1,17 @@
 import React from 'react';
 import { Checkbox, List, ListItem, ListItemText } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
+import { useCallback } from 'react';
+import { toggleDone } from '../actions/actionCreators';
 
 export default function TaskCards() {
   const tasks = useSelector(getTaskListToShowSelector);
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = useCallback((id: string) => {
+    dispatch(toggleDone(id))
+  }, [dispatch])
 
   return (
     <List
@@ -19,7 +26,7 @@ export default function TaskCards() {
             '&:last-child': { borderBottom: '1px solid #ddd' },
           }}
         >
-          <Checkbox edge="start" onChange={() => void 1} checked={false} />
+          <Checkbox edge="start" onChange={() => handleCheckboxChange(task.id)} checked={task.done} />
           <ListItemText
             primary={task.task}
             secondary={`Expires at: ${task.expiresAt}`}
