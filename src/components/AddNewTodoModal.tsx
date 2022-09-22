@@ -7,8 +7,12 @@ import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
   width: '400px',
+  height: '400px',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -41,7 +45,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
   const createNewTask = useCallback(() => {
     dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
     setTaskValue('');
-    setExpirationDate(currentDate);
+    setExpirationDate(new Date());
     handleClose();
   }, [dispatch, handleClose, expirationDate, taskValue]);
 
@@ -65,7 +69,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
           <DateTimePicker
             minDateTime={currentDate}
             renderInput={(props) => <TextField {...props} />}
-            label="DateTimePicker"
+            label="Expiration  Date"
             ampm={false}
             inputFormat="dd/MM/yyyy HH:mm"
             value={expirationDate}
@@ -77,10 +81,12 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             }}
           />
         </LocalizationProvider>
-        <Button disabled={taskValue.trim() === ''} onClick={createNewTask}>
-          Create
-        </Button>
-        <Button onClick={handleClose}>Close</Button>
+        <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+          <Button disabled={taskValue.trim() === ''} onClick={createNewTask}>
+            save
+          </Button>
+          <Button onClick={handleClose}>Close</Button>
+        </Box>
       </Box>
     </Modal>
   );
