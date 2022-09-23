@@ -1,57 +1,48 @@
-import { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { TextField, Modal, Box, Button, Typography } from '@mui/material';
-import { addTodo } from '../actions/actionCreators';
+import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
-
-const style = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  width: '400px',
-  height: '400px',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
-const currentDate = new Date();
 
 interface IAddNewTodoModalProps {
   open: boolean;
-  handleClose: () => void;
+  modalExpirationDate: Date;
+  modalToggleOpen: () => void;
 }
 
 export function AddNewTodoModal(props: IAddNewTodoModalProps) {
-  const { open, handleClose } = props;
+  const currentDate = () => new Date();
+
+  const { open, modalToggleOpen, modalExpirationDate } = props;
   const [taskValue, setTaskValue] = useState('');
-  const [expirationDate, setExpirationDate] = useState(currentDate);
+  const [expirationDate, setExpirationDate] = useState(modalExpirationDate);
   const dispatch = useDispatch();
 
   const taskValueChangeHandler = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       setTaskValue(event.target.value);
     },
     []
   );
 
+  const onDatePicking = useCallback((newValue: Date | null) => {
+    if (newValue) {
+      setExpirationDate(newValue);
+    }
+  }, []);
+
   const createNewTask = useCallback(() => {
     dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
     setTaskValue('');
     setExpirationDate(new Date());
-    handleClose();
-  }, [dispatch, handleClose, expirationDate, taskValue]);
+    modalToggleOpen();
+  }, [dispatch, modalToggleOpen, expirationDate, taskValue]);
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <Box sx={style}>
+    <Modal open={open} onClose={modalToggleOpen}>
+      <Box className="modal-box" sx={{ boxShadow: 24, p: 4 }}>
         <Typography variant="h4" id="modal-title">
           Enter your task
         </Typography>
@@ -67,17 +58,13 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
-            minDateTime={currentDate}
+            minDateTime={currentDate()}
             renderInput={(props) => <TextField {...props} />}
             label="Expiration  Date"
             ampm={false}
             inputFormat="dd/MM/yyyy HH:mm"
             value={expirationDate}
-            onChange={(newValue: Date | null) => {
-              if (newValue) {
-                setExpirationDate(newValue);
-              }
-            }}
+            onChange={(newValue) => onDatePicking(newValue)}
           />
         </LocalizationProvider>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

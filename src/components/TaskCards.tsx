@@ -1,7 +1,5 @@
 import { Checkbox, List, ListItem, ListItemText } from '@mui/material';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDone } from '../actions/actionCreators';
+import { useSelector } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 
 const styleForDoneTasks = {
@@ -14,14 +12,6 @@ const styleForDoneTasks = {
 
 export default function TaskCards() {
   const tasks = useSelector(getTaskListToShowSelector);
-  const dispatch = useDispatch();
-
-  const handleCheckboxChange = useCallback(
-    (id: string) => {
-      dispatch(toggleDone(id));
-    },
-    [dispatch]
-  );
 
   return (
     <List

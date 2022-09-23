@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+.header-title {
+  color: #2b2b2b;
+}
+.header-subtitle {
+  color: #2b2b2b;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.add-button-icon {
+  font-size: 70px !important;
+}
+.add-button-icon:hover {
+  cursor: pointer;
+}
+.task-input-field {
+  width: 400px;
+  max-width: 80vw;
+}
+
+.tasks-list {
+  width: 600px;
+  max-width: 80vw;
+  margin: auto !important;
+}
+
+.task-card {
+  border: 1px solid #ddd;
+  border-bottom: none;
+}
+
+.task-card:last-child {
+  border-bottom: 1px solid #ddd;
+}
+.task-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid #2b2b2b;
+}
+
+.button-box {
+  display: flex;
+  justify-content: flex-end;
+}
