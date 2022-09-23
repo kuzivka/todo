@@ -67,7 +67,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             onChange={(newValue) => onDatePicking(newValue)}
           />
         </LocalizationProvider>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box className="button-box" >
           <Button disabled={!taskValue.trim()} onClick={createNewTask}>
             save
           </Button>

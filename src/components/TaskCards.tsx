@@ -17,17 +17,17 @@ export default function TaskCards() {
 
   return (
     <List className="tasks-list">
-      {tasks.map((task) => (
-        <ListItem key={task.id} className="task-card">
+      {tasks.map(({id, task, done, expiresAt}) => (
+        <ListItem key={id} className="task-card">
           <Checkbox
             edge="start"
-            onChange={() => handleCheckboxChange(task.id)}
-            checked={task.done}
+            onChange={() => handleCheckboxChange(id)}
+            checked={done}
           />
           <ListItemText
-            className={task.done ? 'disabled-task' : ''}
-            primary={task.task}
-            secondary={`Expires at: ${task.expiresAt}`}
+            className={done ? 'disabled-task' : ''}
+            primary={task}
+            secondary={`Expires at: ${expiresAt}`}
           />
         </ListItem>
       ))}
