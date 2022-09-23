@@ -1,7 +1,12 @@
-import { useState, useCallback, ChangeEventHandler } from 'react';
+import {
+  useState,
+  useCallback,
+  ChangeEventHandler,
+  KeyboardEventHandler,
+} from 'react';
+import addHours from 'date-fns/addHours';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { addTodo } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
@@ -10,24 +15,26 @@ import { AddNewTodoModal } from './AddNewTodoModal';
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [taskValue, setTaskValue] = useState('');
+  const [modalExpirationDate, setExpirationDateForModal] = useState(new Date());
   const dispatch = useDispatch();
 
-  const handleModalOpen = useCallback(() => {
-    setModalOpen(true);
-  }, []);
+  const oneDayInAdvanceFromNow = () => addHours(Date.now(), 24);
 
-  const handleModalClose = useCallback(() => {
-    setModalOpen(false);
-  }, []);
+  const modalToggleOpen = useCallback(() => {
+    if (!isModalOpen) {
+      setExpirationDateForModal(oneDayInAdvanceFromNow());
+    }
+    setModalOpen(!isModalOpen);
+  }, [isModalOpen]);
 
   const taskValueChangeHandler: ChangeEventHandler<HTMLInputElement> =
     useCallback((event) => {
       setTaskValue(event.target.value);
     }, []);
 
-  const enterClickHandler = useCallback(
-    (event: any) => {
-      if (event.key === 'Enter') {
+  const enterClickHandler: KeyboardEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      if (event.key === 'Enter' && taskValue.trim()) {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
@@ -37,14 +44,9 @@ export default function TaskInput() {
   );
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <TaskInputField
+    <div className="task-input-container">
+      <TextField
+        className="task-input-field"
         value={taskValue}
         onChange={taskValueChangeHandler}
         color="primary"
@@ -55,20 +57,12 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddButton onClick={handleModalOpen} />
-      <AddNewTodoModal open={isModalOpen} handleClose={handleModalClose} />
+      <AddBoxIcon className="add-button-icon" onClick={modalToggleOpen} />
+      <AddNewTodoModal
+        open={isModalOpen}
+        modalExpirationDate={modalExpirationDate}
+        modalToggleOpen={modalToggleOpen}
+      />
     </div>
   );
 }
-
-const AddButton = styled(AddBoxIcon)`
-  font-size: 70px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const TaskInputField = styled(TextField)`
-  width: 400px;
-  max-width: 80vw;
-`;
