@@ -57,3 +57,11 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.disabled-task {
+  text-decoration-line: line-through;
+  color: #ddd;
+  & .MuiListItemText-secondary {
+    color: #ddd;
+  }
+}
