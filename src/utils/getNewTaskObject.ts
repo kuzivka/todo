@@ -1,5 +1,5 @@
-import { addHours } from "date-fns";
-import { v4 as uuidv4 } from "uuid";
+import { addHours } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 
 const oneDayInAdvanceFromNow = addHours(Date.now(), 24).valueOf();
 
