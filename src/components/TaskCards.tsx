@@ -1,15 +1,13 @@
+import { Clear } from '@mui/icons-material';
 import {
-  Checkbox,
-  List,
+  Checkbox, IconButton, List,
   ListItem,
-  ListItemText,
-  IconButton,
+  ListItemText
 } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo, toggleDone } from '../actions/actionCreators';
-import { Delete } from '@mui/icons-material';
+import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 
 export default function TaskCards() {
   const tasks = useSelector(getTaskListToShowSelector);
@@ -48,7 +46,7 @@ export default function TaskCards() {
             size="small"
             onClick={() => deleteOnClick(id)}
           >
-            <Delete fontSize="inherit" />
+            <Clear fontSize="medium" />
           </IconButton>
         </ListItem>
       ))}
