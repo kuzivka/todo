@@ -5,6 +5,7 @@ interface TodoToShow {
   id: string;
   task: string;
   expiresAt: string;
+  done: boolean;
 }
 
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
@@ -15,6 +16,7 @@ export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
       id: task.id,
       task: task.task,
       expiresAt: format(task.expiresAt, 'd.L.yyyy H:mm'),
+      done: task.done,
     };
   });
 };

@@ -13,8 +13,3 @@ interface ToDoState {
   sortBy: SortingOption;
   hideDone: boolean;
 }
-
-interface ToDoAction {
-  type: string;
-  payload: ToDo;
-}

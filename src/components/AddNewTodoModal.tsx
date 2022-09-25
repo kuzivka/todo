@@ -62,12 +62,12 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             renderInput={(props) => <TextField {...props} />}
             label="Expiration  Date"
             ampm={false}
-            inputFormat="dd/MM/yyyy HH:mm"
+            inputFormat="dd.MM.yyyy HH:mm"
             value={expirationDate}
             onChange={(newValue) => onDatePicking(newValue)}
           />
         </LocalizationProvider>
-        <Box className="button-box">
+        <Box className="button-box" >
           <Button disabled={!taskValue.trim()} onClick={createNewTask}>
             save
           </Button>

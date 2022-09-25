@@ -1,4 +1,4 @@
-import { ADD_TODO } from './actions';
+import { ADD_TODO, TOGGLE_DONE } from './actions';
 
 export const addTodo = (task: ToDo) => {
   return {
@@ -7,3 +7,9 @@ export const addTodo = (task: ToDo) => {
   };
 };
 
+export const toggleDone = (taskId: string) => {
+  return {
+    type: TOGGLE_DONE,
+    payload: taskId,
+  };
+};
