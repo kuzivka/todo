@@ -1,5 +1,9 @@
-import { ToDoAction, ToggleDoneAction } from '../actions/action.types';
-import { ADD_TODO, TOGGLE_DONE } from '../actions/actions';
+import {
+  ToDoAction,
+  ToggleDoneAction,
+  DeleteTodoAction,
+} from '../actions/action.types';
+import { ADD_TODO, DELETE_TODO, TOGGLE_DONE } from '../actions/actions';
 
 const initialState: ToDoState = {
   tasks: [],
@@ -9,7 +13,7 @@ const initialState: ToDoState = {
 
 export const todoReducer = (
   state: ToDoState = initialState,
-  action: ToDoAction | ToggleDoneAction
+  action: ToDoAction | ToggleDoneAction | DeleteTodoAction
 ): ToDoState => {
   switch (action.type) {
     case ADD_TODO: {
@@ -24,6 +28,12 @@ export const todoReducer = (
         taskToUpdate.done = !taskToUpdate.done;
       }
       return newState;
+    }
+    case DELETE_TODO: {
+      const newListOfTasks = state.tasks.filter(
+        (task) => task.id !== action.payload
+      );
+      return { ...state, tasks: newListOfTasks };
     }
     default:
       return state;

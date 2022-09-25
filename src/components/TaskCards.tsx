@@ -1,8 +1,15 @@
-import { Checkbox, List, ListItem, ListItemText } from '@mui/material';
+import {
+  Checkbox,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+} from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 import { useCallback } from 'react';
-import { toggleDone } from '../actions/actionCreators';
+import { deleteTodo, toggleDone } from '../actions/actionCreators';
+import { Delete } from '@mui/icons-material';
 
 export default function TaskCards() {
   const tasks = useSelector(getTaskListToShowSelector);
@@ -15,9 +22,16 @@ export default function TaskCards() {
     [dispatch]
   );
 
+  const deleteOnClick = useCallback(
+    (id: string) => {
+      dispatch(deleteTodo(id));
+    },
+    [dispatch]
+  );
+
   return (
     <List className="tasks-list">
-      {tasks.map(({id, task, done, expiresAt}) => (
+      {tasks.map(({ id, task, done, expiresAt }) => (
         <ListItem key={id} className="task-card">
           <Checkbox
             edge="start"
@@ -29,6 +43,13 @@ export default function TaskCards() {
             primary={task}
             secondary={`Expires at: ${expiresAt}`}
           />
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => deleteOnClick(id)}
+          >
+            <Delete fontSize="inherit" />
+          </IconButton>
         </ListItem>
       ))}
     </List>
