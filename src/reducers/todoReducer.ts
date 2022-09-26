@@ -3,7 +3,7 @@ import {
   ToggleDoneAction,
   DeleteTodoAction,
 } from '../actions/action.types';
-import { ADD_TODO, DELETE_TODO, TOGGLE_DONE } from '../actions/actions';
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_DONE } from '../actions/actions';
 
 const initialState: ToDoState = {
   tasks: [],
@@ -35,6 +35,9 @@ export const todoReducer = (
       );
       return { ...state, tasks: newListOfTasks };
     }
+    // case EDIT_TODO:{
+      
+    // }
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { Clear } from '@mui/icons-material';
+import { Clear, Edit } from '@mui/icons-material';
 import {
   Checkbox,
   IconButton,
@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTodo, toggleDone } from '../actions/actionCreators';
+import { deleteTodo, editTodo, toggleDone } from '../actions/actionCreators';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 
 export default function TaskCards() {
@@ -29,9 +29,15 @@ export default function TaskCards() {
     [dispatch]
   );
 
+  const handleEdit = useCallback(
+    (taskId: string)=>{
+      dispatch(editTodo(taskId))
+    }, [dispatch]
+  )
+
   return (
     <List className="tasks-list">
-      {tasks.map(({ id, task, done, expiresAt }) => (
+      {tasks.map(({id, task, expiresAt, done}) => (
         <ListItem key={id} className="task-card">
           <Checkbox
             edge="start"
@@ -43,6 +49,9 @@ export default function TaskCards() {
             primary={task}
             secondary={`Expires at: ${expiresAt}`}
           />
+          <IconButton aria-label="edit" size="small" onClick={()=>handleEdit(id)}>
+            <Edit fontSize="small" />
+          </IconButton >
           <IconButton
             aria-label="delete"
             size="small"

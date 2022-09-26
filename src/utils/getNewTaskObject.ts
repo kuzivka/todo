@@ -15,3 +15,18 @@ export function getNewTaskObject(
     done: false,
   };
 }
+
+export function getEditedTaskObject(
+  id: string,
+  task: string,
+  createdAt: number,
+  expiresAt: number
+): ToDo {
+  return {
+    id,
+    task,
+    createdAt,
+    expiresAt,
+    done: false
+  };
+}

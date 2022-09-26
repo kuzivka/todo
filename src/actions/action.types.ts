@@ -1,7 +1,7 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_DONE } from './actions';
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_DONE } from './actions';
 
 export interface ToDoAction {
-  type: typeof ADD_TODO;
+  type: typeof ADD_TODO | typeof EDIT_TODO;
   payload: ToDo;
 }
 
