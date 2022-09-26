@@ -1,13 +1,6 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 
-interface TodoToShow {
-  id: string;
-  task: string;
-  createdAt: string;
-  expiresAt: string;
-  done: boolean;
-}
 
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state

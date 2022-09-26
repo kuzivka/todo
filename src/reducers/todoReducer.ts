@@ -20,7 +20,7 @@ export const todoReducer = (
       return { ...state, tasks: [...state.tasks, action.payload] };
     }
     case TOGGLE_DONE: {
-      const newState = { ...state, tasks: [...state.tasks] };
+      const newState = { ...state };
       const taskToUpdate = newState.tasks.find(
         (task) => task.id === action.payload
       );
@@ -35,9 +35,9 @@ export const todoReducer = (
       );
       return { ...state, tasks: newListOfTasks };
     }
-    // case EDIT_TODO:{
+    case EDIT_TODO:{
       
-    // }
+    }
     default:
       return state;
   }

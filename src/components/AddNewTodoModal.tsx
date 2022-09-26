@@ -1,23 +1,33 @@
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { ChangeEvent, useCallback, useState } from 'react';
+import {
+  ChangeEvent,
+  useCallback,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../actions/actionCreators';
-import { getNewTaskObject } from '../utils/getNewTaskObject';
+import { addTodo, editTodo } from '../actions/actionCreators';
+import {
+  getEditedTaskObject,
+  getNewTaskObject,
+} from '../utils/getNewTaskObject';
 
 interface IAddNewTodoModalProps {
   open: boolean;
-  modalExpirationDate: Date;
-  modalToggleOpen: () => void;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  task: ToDo;
+  edit: boolean;
 }
 
 export function AddNewTodoModal(props: IAddNewTodoModalProps) {
   const currentDate = () => new Date();
 
-  const { open, modalToggleOpen, modalExpirationDate } = props;
-  const [taskValue, setTaskValue] = useState('');
-  const [expirationDate, setExpirationDate] = useState(modalExpirationDate);
+  const { open, setModalOpen, task, edit } = props;
+  const [taskValue, setTaskValue] = useState(task.task);
+  const [expirationDate, setExpirationDate] = useState(task.expiresAt);
   const dispatch = useDispatch();
 
   const taskValueChangeHandler = useCallback(
@@ -29,22 +39,34 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
 
   const onDatePicking = useCallback((newValue: Date | null) => {
     if (newValue) {
-      setExpirationDate(newValue);
+      setExpirationDate(newValue.valueOf());
     }
   }, []);
 
-  const createNewTask = useCallback(() => {
-    dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
+  const handleSave = useCallback(() => {
+    if (edit) {
+      dispatch(
+        editTodo(
+          getEditedTaskObject({
+            ...task,
+            expiresAt: expirationDate,
+            task: taskValue,
+          })
+        )
+      );
+    } else {
+      dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
+    }
     setTaskValue('');
-    setExpirationDate(new Date());
-    modalToggleOpen();
-  }, [dispatch, modalToggleOpen, expirationDate, taskValue]);
+    setModalOpen(false);
+  }, [edit, setModalOpen, dispatch, task, expirationDate, taskValue]);
 
-  const dateChangeHandler = () => (value: Date | null) =>
-    onDatePicking(value);
+  const dateChangeHandler = () => (value: Date | null) => onDatePicking(value);
+
+  const closeModal = () => setModalOpen(false);
 
   return (
-    <Modal open={open} onClose={modalToggleOpen}>
+    <Modal open={open} onClose={closeModal}>
       <Box className="modal-box" sx={{ boxShadow: 24, p: 4 }}>
         <Typography variant="h4" id="modal-title">
           Enter your task
@@ -54,7 +76,6 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
           value={taskValue}
           onChange={taskValueChangeHandler}
           color="primary"
-          inputProps={{ pattern: '[a-zA-Z0-9]+$' }}
           id="outlined-basic"
           label="Describe Your Task"
           variant="outlined"
@@ -71,10 +92,10 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
           />
         </LocalizationProvider>
         <Box className="button-box">
-          <Button disabled={!taskValue.trim()} onClick={createNewTask}>
+          <Button disabled={!taskValue.trim()} onClick={handleSave}>
             save
           </Button>
-          <Button onClick={modalToggleOpen}>Close</Button>
+          <Button onClick={closeModal}>Close</Button>
         </Box>
       </Box>
     </Modal>

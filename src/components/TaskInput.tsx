@@ -15,22 +15,14 @@ import { AddNewTodoModal } from './AddNewTodoModal';
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [taskValue, setTaskValue] = useState('');
-  const [modalExpirationDate, setExpirationDateForModal] = useState(new Date());
   const dispatch = useDispatch();
-
-  const oneDayInAdvanceFromNow = () => addHours(Date.now(), 24);
-
-  const modalToggleOpen = useCallback(() => {
-    if (!isModalOpen) {
-      setExpirationDateForModal(oneDayInAdvanceFromNow());
-    }
-    setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
 
   const taskValueChangeHandler: ChangeEventHandler<HTMLInputElement> =
     useCallback((event) => {
       setTaskValue(event.target.value.replace(/[^\w\s]/gi, ''));
     }, []);
+
+    const openModal = () => setModalOpen(true);
 
   const enterClickHandler: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -56,11 +48,12 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddBoxIcon className="add-button-icon" onClick={modalToggleOpen} />
+      <AddBoxIcon className="add-button-icon" onClick={openModal} />
       <AddNewTodoModal
+        edit={false}
         open={isModalOpen}
-        modalExpirationDate={modalExpirationDate}
-        modalToggleOpen={modalToggleOpen}
+        task={getNewTaskObject()}
+        setModalOpen={setModalOpen}
       />
     </div>
   );

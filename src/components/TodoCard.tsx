@@ -1,8 +1,11 @@
-import { Clear } from '@mui/icons-material';
+import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { toggleDone, deleteTodo } from '../actions/actionCreators';
+import { Box } from '@mui/system';
+import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDone, deleteTodo, editTodo } from '../actions/actionCreators';
+import { getTaskToEdit } from '../selectors/getTaskToEdit';
+import { AddNewTodoModal } from './AddNewTodoModal';
 
 interface ITodoCardProps {
   task: TodoToShow;
@@ -11,6 +14,10 @@ interface ITodoCardProps {
 export default function TodoCard(props: ITodoCardProps) {
   const { id, task, done, expiresAt } = props.task;
   const dispatch = useDispatch();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const taskToEdit = useSelector((state: ToDoState) =>
+    getTaskToEdit(state, id)
+  );
 
   const handleCheckboxChange = useCallback(() => {
     dispatch(toggleDone(id));
@@ -20,17 +27,32 @@ export default function TodoCard(props: ITodoCardProps) {
     dispatch(deleteTodo(id));
   }, [dispatch, id]);
 
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
   return (
-    <ListItem className="task-card">
-      <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
-      <ListItemText
-        className={done ? 'disabled-task' : ''}
-        primary={task}
-        secondary={`Expires at: ${expiresAt}`}
+    <Box>
+      <ListItem className="task-card">
+        <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
+        <ListItemText
+          className={done ? 'disabled-task' : ''}
+          primary={task}
+          secondary={`Expires at: ${expiresAt}`}
+        />
+        <IconButton onClick={handleModalOpen}>
+          <Edit fontSize="small" />
+        </IconButton>
+        <IconButton aria-label="delete" size="small" onClick={deleteOnClick}>
+          <Clear fontSize="medium" />
+        </IconButton>
+      </ListItem>
+      <AddNewTodoModal
+        open={isModalOpen}
+        task={taskToEdit}
+        setModalOpen={setModalOpen}
+        edit={true}
       />
-      <IconButton aria-label="delete" size="small" onClick={deleteOnClick}>
-        <Clear fontSize="medium" />
-      </IconButton>
-    </ListItem>
+    </Box>
   );
 }
