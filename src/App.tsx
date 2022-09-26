@@ -1,9 +1,8 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
+import './components/styles/style.scss';
 import TaskCards from './components/TaskCards';
 import TaskInput from './components/TaskInput';
-import './components/styles/style.scss';
-import { createContext, Provider, useState } from 'react';
 
 function App() {
   return (
