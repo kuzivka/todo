@@ -1,8 +1,10 @@
 import { Clear } from '@mui/icons-material';
 import {
-  Checkbox, IconButton, List,
+  Checkbox,
+  IconButton,
+  List,
   ListItem,
-  ListItemText
+  ListItemText,
 } from '@mui/material';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
