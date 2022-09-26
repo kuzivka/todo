@@ -1,24 +1,18 @@
 import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
-import { Box } from '@mui/system';
-import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDone, deleteTodo, editTodo } from '../actions/actionCreators';
-import { getTaskToEdit } from '../selectors/getTaskToEdit';
-import { AddNewTodoModal } from './AddNewTodoModal';
+import { Fragment, useCallback, Dispatch, SetStateAction } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, toggleDone } from '../actions/actionCreators';
 
 interface ITodoCardProps {
   task: TodoToShow;
+  onEditClick: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export default function TodoCard(props: ITodoCardProps) {
-  const { id, task, done, expiresAt } = props.task;
+export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
+  const { id, task: taskValue, done, expiresAt } = task;
+
   const dispatch = useDispatch();
-  const [isModalOpen, setModalOpen] = useState(false);
-  
-  const taskToEdit = useSelector((state: ToDoState) =>
-    getTaskToEdit(state, id)
-  );
 
   const handleCheckboxChange = useCallback(() => {
     dispatch(toggleDone(id));
@@ -28,32 +22,26 @@ export default function TodoCard(props: ITodoCardProps) {
     dispatch(deleteTodo(id));
   }, [dispatch, id]);
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
+  const handleIconButtonClick = () => {
+    onEditClick(id);
   };
 
   return (
-    <Box>
+    <Fragment>
       <ListItem className="task-card">
         <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
         <ListItemText
           className={done ? 'disabled-task' : ''}
-          primary={task}
+          primary={taskValue}
           secondary={`Expires at: ${expiresAt}`}
         />
-        <IconButton onClick={handleModalOpen}>
+        <IconButton onClick={handleIconButtonClick}>
           <Edit fontSize="small" />
         </IconButton>
         <IconButton aria-label="delete" size="small" onClick={deleteOnClick}>
           <Clear fontSize="medium" />
         </IconButton>
       </ListItem>
-      <AddNewTodoModal
-        open={isModalOpen}
-        task={taskToEdit}
-        setModalOpen={setModalOpen}
-        edit={true}
-      />
-    </Box>
+    </Fragment>
   );
 }
