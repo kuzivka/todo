@@ -15,12 +15,3 @@ export function getNewTaskObject(
     done: false,
   };
 }
-
-export function getEditedTaskObject(
-  task: ToDo
-): ToDo {
-  return {
-    ...task,
-    done: false
-  };
-}

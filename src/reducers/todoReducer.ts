@@ -25,7 +25,8 @@ export const todoReducer = (
       return { ...state, tasks: [...state.tasks, action.payload] };
     }
     case TOGGLE_DONE: {
-      const newState = { ...state, tasks: [...state.tasks] };
+      const newListOfTasks = state.tasks.map((task) => ({ ...task }));
+      const newState = { ...state, tasks: newListOfTasks };
       const taskToUpdate = newState.tasks.find(
         (task) => task.id === action.payload
       );
@@ -45,8 +46,8 @@ export const todoReducer = (
       const taskToUpdate = newState.tasks.findIndex(
         (task) => task.id === action.payload.id
       );
-      newState.tasks[taskToUpdate] = action.payload
-      return {...newState, tasks: [...newState.tasks] }
+      newState.tasks[taskToUpdate] = action.payload;
+      return newState;
     }
     default:
       return state;

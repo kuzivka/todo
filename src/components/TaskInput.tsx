@@ -4,7 +4,6 @@ import {
   ChangeEventHandler,
   KeyboardEventHandler,
 } from 'react';
-import addHours from 'date-fns/addHours';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -22,7 +21,9 @@ export default function TaskInput() {
       setTaskValue(event.target.value.replace(/[^\w\s]/gi, ''));
     }, []);
 
-    const openModal = () => setModalOpen(true);
+  const toggleModalOpen = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   const enterClickHandler: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -48,13 +49,10 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddBoxIcon className="add-button-icon" onClick={openModal} />
-      <AddNewTodoModal
-        edit={false}
-        open={isModalOpen}
-        task={getNewTaskObject()}
-        setModalOpen={setModalOpen}
-      />
+      <AddBoxIcon className="add-button-icon" onClick={toggleModalOpen} />
+      {isModalOpen && (
+        <AddNewTodoModal open={isModalOpen} onClose={toggleModalOpen} />
+      )}
     </div>
   );
 }

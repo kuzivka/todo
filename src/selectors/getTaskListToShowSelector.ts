@@ -1,7 +1,6 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 
-
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state
 ) => {

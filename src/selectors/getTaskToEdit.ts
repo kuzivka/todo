@@ -11,4 +11,3 @@ export const getTaskToEdit: Selector<ToDoState, ToDo> = (state, id: string) => {
     return getNewTaskObject();
   }
 };
-
