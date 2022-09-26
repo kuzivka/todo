@@ -40,6 +40,9 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
     modalToggleOpen();
   }, [dispatch, modalToggleOpen, expirationDate, taskValue]);
 
+  const dateChangeHandler = () => (value: Date | null) =>
+    onDatePicking(value);
+
   return (
     <Modal open={open} onClose={modalToggleOpen}>
       <Box className="modal-box" sx={{ boxShadow: 24, p: 4 }}>
@@ -64,7 +67,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
             ampm={false}
             inputFormat="dd.MM.yyyy HH:mm"
             value={expirationDate}
-            onChange={(newValue) => onDatePicking(newValue)}
+            onChange={dateChangeHandler()}
           />
         </LocalizationProvider>
         <Box className="button-box">

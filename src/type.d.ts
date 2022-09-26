@@ -13,3 +13,10 @@ interface ToDoState {
   sortBy: SortingOption;
   hideDone: boolean;
 }
+
+interface TodoToShow {
+  id: string;
+  task: string;
+  expiresAt: string;
+  done: boolean;
+}
