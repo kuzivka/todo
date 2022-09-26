@@ -57,7 +57,6 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
     } else {
       dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
     }
-    setTaskValue('');
     setModalOpen(false);
   }, [edit, setModalOpen, dispatch, task, expirationDate, taskValue]);
 

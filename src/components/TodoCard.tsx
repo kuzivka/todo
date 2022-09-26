@@ -15,6 +15,7 @@ export default function TodoCard(props: ITodoCardProps) {
   const { id, task, done, expiresAt } = props.task;
   const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false);
+  
   const taskToEdit = useSelector((state: ToDoState) =>
     getTaskToEdit(state, id)
   );

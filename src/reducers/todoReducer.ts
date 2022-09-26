@@ -3,7 +3,12 @@ import {
   ToggleDoneAction,
   DeleteTodoAction,
 } from '../actions/action.types';
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_DONE } from '../actions/actions';
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+  TOGGLE_DONE,
+} from '../actions/actions';
 
 const initialState: ToDoState = {
   tasks: [],
@@ -20,7 +25,7 @@ export const todoReducer = (
       return { ...state, tasks: [...state.tasks, action.payload] };
     }
     case TOGGLE_DONE: {
-      const newState = { ...state };
+      const newState = { ...state, tasks: [...state.tasks] };
       const taskToUpdate = newState.tasks.find(
         (task) => task.id === action.payload
       );
@@ -35,8 +40,13 @@ export const todoReducer = (
       );
       return { ...state, tasks: newListOfTasks };
     }
-    case EDIT_TODO:{
-      
+    case EDIT_TODO: {
+      const newState = { ...state, tasks: [...state.tasks] };
+      const taskToUpdate = newState.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      );
+      newState.tasks[taskToUpdate] = action.payload
+      return {...newState, tasks: [...newState.tasks] }
     }
     default:
       return state;
