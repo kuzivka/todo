@@ -22,7 +22,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
 
   const taskValueChangeHandler = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setTaskValue(event.target.value);
+      setTaskValue(event.target.value.replace(/[^\w\s]/gi, ''));
     },
     []
   );

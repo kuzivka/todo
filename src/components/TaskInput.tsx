@@ -29,7 +29,7 @@ export default function TaskInput() {
 
   const taskValueChangeHandler: ChangeEventHandler<HTMLInputElement> =
     useCallback((event) => {
-      setTaskValue(event.target.value);
+      setTaskValue(event.target.value.replace(/[^\w\s]/gi, ''));
     }, []);
 
   const enterClickHandler: KeyboardEventHandler<HTMLDivElement> = useCallback(
@@ -50,7 +50,6 @@ export default function TaskInput() {
         value={taskValue}
         onChange={taskValueChangeHandler}
         color="primary"
-        inputProps={{ pattern: '[a-zA-Z0-9]+$' }}
         id="outlined-basic"
         label="Describe Your Task"
         variant="outlined"
