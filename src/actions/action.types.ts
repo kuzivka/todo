@@ -1,5 +1,6 @@
 import {
   ADD_TODO,
+  DELETE_COMPLETED,
   DELETE_TODO,
   EDIT_TODO,
   FILTER_TODO,
@@ -24,4 +25,8 @@ export interface DeleteTodoAction {
 export interface FilterTodoAction {
   type: typeof FILTER_TODO;
   payload: TaskToShow;
+}
+
+export interface DeleteComletedAction {
+  type: typeof DELETE_COMPLETED;
 }

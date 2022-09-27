@@ -4,6 +4,7 @@ import {
   DELETE_TODO,
   EDIT_TODO,
   FILTER_TODO,
+  DELETE_COMPLETED,
 } from './actions';
 
 export const addTodo = (task: ToDo) => {
@@ -39,4 +40,8 @@ export const filterTodoList = (show: string) => {
     type: FILTER_TODO,
     payload: show,
   };
+};
+
+export const deleteComletedFromTodoList = () => {
+  return { type: DELETE_COMPLETED };
 };

@@ -28,7 +28,6 @@ export function EditTodoModal(props: EditTodoModalProps) {
         })
       );
       dispatch(filterTodoList('all'));
-
       onClose();
     },
     [dispatch, onClose, taskToEdit]

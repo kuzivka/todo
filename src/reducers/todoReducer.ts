@@ -3,9 +3,11 @@ import {
   ToggleDoneAction,
   DeleteTodoAction,
   FilterTodoAction,
+  DeleteComletedAction,
 } from '../actions/action.types';
 import {
   ADD_TODO,
+  DELETE_COMPLETED,
   DELETE_TODO,
   EDIT_TODO,
   FILTER_TODO,
@@ -20,7 +22,12 @@ const initialState: ToDoState = {
 
 export const todoReducer = (
   state: ToDoState = initialState,
-  action: ToDoAction | ToggleDoneAction | DeleteTodoAction | FilterTodoAction
+  action:
+    | ToDoAction
+    | ToggleDoneAction
+    | DeleteTodoAction
+    | FilterTodoAction
+    | DeleteComletedAction
 ): ToDoState => {
   switch (action.type) {
     case ADD_TODO: {
@@ -52,8 +59,12 @@ export const todoReducer = (
       return newState;
     }
     case FILTER_TODO: {
-      const newState = {...state, show: action.payload}
+      const newState = { ...state, show: action.payload };
       return newState;
+    }
+    case DELETE_COMPLETED: {
+      const newListOfTasks = state.tasks.filter((task) => task.done === false);
+      return {...state, tasks: newListOfTasks}
     }
     default:
       return state;
