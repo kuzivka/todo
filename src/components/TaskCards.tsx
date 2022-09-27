@@ -30,6 +30,6 @@ export default function TaskCards() {
       {tasks.length === 0 && (
         <Typography variant="subtitle1" className='no-item-title'>There are no items</Typography>
       )}
-    </Fragment>
+    </>
   );
 }
