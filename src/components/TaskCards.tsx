@@ -16,7 +16,7 @@ export default function TaskCards() {
   return (
     <Fragment>
       <List className="tasks-list">
-        {tasks.map((task) => (
+        {tasks && tasks.map((task) => (
           <TodoCard key={task.id} task={task} onEditClick={setTaskToEdit} />
         ))}
       </List>

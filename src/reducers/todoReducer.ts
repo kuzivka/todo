@@ -13,7 +13,7 @@ import {
 const initialState: ToDoState = {
   tasks: [],
   sortBy: 'createdAt',
-  hideDone: false,
+  show: 'all',
 };
 
 export const todoReducer = (
