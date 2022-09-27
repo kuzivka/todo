@@ -4,7 +4,6 @@ import {
   ChangeEventHandler,
   KeyboardEventHandler,
 } from 'react';
-import addHours from 'date-fns/addHours';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -15,22 +14,16 @@ import { AddNewTodoModal } from './AddNewTodoModal';
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [taskValue, setTaskValue] = useState('');
-  const [modalExpirationDate, setExpirationDateForModal] = useState(new Date());
   const dispatch = useDispatch();
-
-  const oneDayInAdvanceFromNow = () => addHours(Date.now(), 24);
-
-  const modalToggleOpen = useCallback(() => {
-    if (!isModalOpen) {
-      setExpirationDateForModal(oneDayInAdvanceFromNow());
-    }
-    setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
 
   const taskValueChangeHandler: ChangeEventHandler<HTMLInputElement> =
     useCallback((event) => {
-      setTaskValue(event.target.value);
+      setTaskValue(event.target.value.replace(/[^\w\s]/gi, ''));
     }, []);
+
+  const toggleModalOpen = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   const enterClickHandler: KeyboardEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -50,19 +43,16 @@ export default function TaskInput() {
         value={taskValue}
         onChange={taskValueChangeHandler}
         color="primary"
-        inputProps={{ pattern: '[a-zA-Z0-9]+$' }}
         id="outlined-basic"
         label="Describe Your Task"
         variant="outlined"
         onKeyDown={enterClickHandler}
       />
 
-      <AddBoxIcon className="add-button-icon" onClick={modalToggleOpen} />
-      <AddNewTodoModal
-        open={isModalOpen}
-        modalExpirationDate={modalExpirationDate}
-        modalToggleOpen={modalToggleOpen}
-      />
+      <AddBoxIcon className="add-button-icon" onClick={toggleModalOpen} />
+      {isModalOpen && (
+        <AddNewTodoModal open={isModalOpen} onClose={toggleModalOpen} />
+      )}
     </div>
   );
 }

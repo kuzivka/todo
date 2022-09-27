@@ -1,16 +1,16 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
-import TaskCard from './components/TaskCards';
-import TaskInput from './components/TaskInput';
 import './components/styles/style.scss';
+import TaskCards from './components/TaskCards';
+import TaskInput from './components/TaskInput';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" >
+      <div className="App">
         <Header />
         <TaskInput />
-        <TaskCard />
+        <TaskCards />
       </div>
     </ThemeProvider>
   );

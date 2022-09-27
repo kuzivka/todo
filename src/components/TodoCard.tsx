@@ -1,15 +1,17 @@
-import { Clear } from '@mui/icons-material';
+import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
-import { useCallback } from 'react';
+import { Fragment, useCallback, Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleDone, deleteTodo } from '../actions/actionCreators';
+import { deleteTodo, toggleDone } from '../actions/actionCreators';
 
 interface ITodoCardProps {
   task: TodoToShow;
+  onEditClick: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export default function TodoCard(props: ITodoCardProps) {
-  const { id, task, done, expiresAt } = props.task;
+export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
+  const { id, task: taskValue, done, expiresAt } = task;
+
   const dispatch = useDispatch();
 
   const handleCheckboxChange = useCallback(() => {
@@ -20,17 +22,26 @@ export default function TodoCard(props: ITodoCardProps) {
     dispatch(deleteTodo(id));
   }, [dispatch, id]);
 
+  const handleIconButtonClick = () => {
+    onEditClick(id);
+  };
+
   return (
-    <ListItem className="task-card">
-      <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
-      <ListItemText
-        className={done ? 'disabled-task' : ''}
-        primary={task}
-        secondary={`Expires at: ${expiresAt}`}
-      />
-      <IconButton aria-label="delete" size="small" onClick={deleteOnClick}>
-        <Clear fontSize="medium" />
-      </IconButton>
-    </ListItem>
+    <Fragment>
+      <ListItem className="task-card">
+        <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
+        <ListItemText
+          className={done ? 'disabled-task' : ''}
+          primary={taskValue}
+          secondary={`Expires at: ${expiresAt}`}
+        />
+        <IconButton onClick={handleIconButtonClick}>
+          <Edit fontSize="small" />
+        </IconButton>
+        <IconButton aria-label="delete" size="small" onClick={deleteOnClick}>
+          <Clear fontSize="medium" />
+        </IconButton>
+      </ListItem>
+    </Fragment>
   );
 }
