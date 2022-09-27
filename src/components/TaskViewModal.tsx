@@ -3,6 +3,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { addDays } from 'date-fns';
 import { ChangeEvent, useCallback, useState } from 'react';
+import { TIME_IN_MODAL } from './constants';
 
 interface ITaskViewModalProps {
   open: boolean;
@@ -62,7 +63,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
             renderInput={(props) => <TextField {...props} />}
             label="Expiration  Date"
             ampm={false}
-            inputFormat="dd.MM.yyyy HH:mm"
+            inputFormat={TIME_IN_MODAL}
             value={expirationDate}
             onChange={onDatePicking}
           />
