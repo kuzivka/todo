@@ -1,4 +1,4 @@
-import { List } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import { useState, Fragment, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
@@ -26,6 +26,9 @@ export default function TaskCards() {
           open={!!taskToEditId}
           onClose={resetTaskId}
         />
+      )}
+      {tasks.length === 0 && (
+        <Typography variant="subtitle1" className='no-item-title'>There are no items</Typography>
       )}
     </Fragment>
   );
