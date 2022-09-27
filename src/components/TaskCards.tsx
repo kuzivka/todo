@@ -14,7 +14,7 @@ export default function TaskCards() {
   }, [setTaskToEdit]);
 
   return (
-    <Fragment>
+    <>
       <List className="tasks-list">
         {tasks.map((task) => (
           <TodoCard key={task.id} task={task} onEditClick={setTaskToEdit} />

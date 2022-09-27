@@ -51,11 +51,14 @@ export const todoReducer = (
       return { ...state, tasks: newListOfTasks };
     }
     case EDIT_TODO: {
-      const newState = { ...state, tasks: [...state.tasks]};
-      const taskToUpdate = newState.tasks.findIndex(
-        (task) => task.id === action.payload.id
-      );
-      newState.tasks[taskToUpdate] = action.payload;
+      const updatedTasks = state.tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return (task = action.payload);
+        } else {
+          return task;
+        }
+      });
+      const newState = { ...state, tasks: updatedTasks };
       return newState;
     }
     case FILTER_TODO: {
