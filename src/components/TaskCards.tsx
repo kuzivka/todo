@@ -1,5 +1,5 @@
 import { List } from '@mui/material';
-import { useState, Fragment, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 import { EditTodoModal } from './EditTodoModal';
@@ -14,7 +14,7 @@ export default function TaskCards() {
   }, [setTaskToEdit]);
 
   return (
-    <Fragment>
+    <>
       <List className="tasks-list">
         {tasks.map((task) => (
           <TodoCard key={task.id} task={task} onEditClick={setTaskToEdit} />
@@ -27,6 +27,6 @@ export default function TaskCards() {
           onClose={resetTaskId}
         />
       )}
-    </Fragment>
+    </>
   );
 }
