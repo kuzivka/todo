@@ -7,7 +7,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import { addTodo } from '../actions/actionCreators';
+import { addTodo, filterTodoList } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 
@@ -31,6 +31,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
+        dispatch(filterTodoList('all'));
       }
     },
     [dispatch, taskValue]
