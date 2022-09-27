@@ -1,12 +1,10 @@
+import { AddBox } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 import {
-  useState,
-  useCallback,
   ChangeEventHandler,
-  KeyboardEventHandler,
+  KeyboardEventHandler, useCallback, useState
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { MenuItem, Select, TextField } from '@mui/material';
-import { AddBox, SortOutlined } from '@mui/icons-material';
 import { addTodo, filterTodoList } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
@@ -39,20 +37,6 @@ export default function TaskInput() {
 
   return (
     <div className="task-input-container">
-      <SortOutlined  />
-      <Select
-      className=''
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value=''
-
-          label="Sorting"
-          // onChange={}
-        >
-          <MenuItem  value='createdAt'>Creation Date</MenuItem>
-          <MenuItem value='task'>Alphabetically</MenuItem>
-
-        </Select>
       <TextField
         className="task-input-field"
         value={taskValue}

@@ -18,7 +18,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
 
   const { open, initialTask, onClose, onSave } = props;
 
-  const [taskValue, setTaskValue] = useState(initialTask?.task);
+  const [taskValue, setTaskValue] = useState(initialTask?.task ?? '');
   const [expirationDate, setExpirationDate] = useState<number>(
     initialTask?.expiresAt ? initialTask.expiresAt : oneDayAdvanceDate.valueOf()
   );
