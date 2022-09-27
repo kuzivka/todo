@@ -1,36 +1,45 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteComletedFromTodoList, filterTodoList } from '../actions/actionCreators';
+import {
+  deleteComletedFromTodoList,
+  filterTodoList,
+} from '../actions/actionCreators';
+import FilterBtn from './FilterBtn';
 
 export default function FilterBar() {
   const dispatch = useDispatch();
+  const [isActive, setActive] = useState('All');
 
-  const handleAllClick = () => {
-    dispatch(filterTodoList('all'));
-  };
-  const handleActiveClick = () => {
-    dispatch(filterTodoList('active'));
-  };
-  const handleComletedClick = () => {
-    dispatch(filterTodoList('completed'));
-  };
   const handleDeleteAllClick = () => {
     dispatch(deleteComletedFromTodoList());
+    dispatch(filterTodoList('all'));
   };
 
   return (
     <Box className="filter-buttons-container">
-      <Button size="small" onClick={handleAllClick}>
-        All
+      <FilterBtn
+        isActive={isActive === 'All'}
+        title="All"
+        show="all"
+        setActive={setActive}
+      />
+      <FilterBtn
+        isActive={isActive === 'Comleted'}
+        title="Comleted"
+        show="comleted"
+        setActive={setActive}
+      />
+      <FilterBtn
+        isActive={isActive === 'Active'}
+        title="Active"
+        show="active"
+        setActive={setActive}
+      />
+      <Button size="small" variant="outlined" onClick={handleDeleteAllClick}>
+        delete completed
       </Button>
-      <Button size="small" onClick={handleActiveClick}>
-        Active
-      </Button>
-      <Button size="small" onClick={handleComletedClick}>
-        Completed
-      </Button>
-      <Button size='small' variant='outlined' onClick={handleDeleteAllClick} >delete completed</Button>
     </Box>
   );
 }
