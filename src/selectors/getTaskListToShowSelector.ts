@@ -1,5 +1,6 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
+import { TIME_ON_CARDS } from '../constants';
 
 const filteredList = (state: ToDoState) => {
   return state.show === 'active'
@@ -16,8 +17,8 @@ export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
     return {
       id: task.id,
       task: task.task,
-      createdAt: format(task.createdAt, 'd.L.yyyy H:mm'),
-      expiresAt: format(task.expiresAt, 'd.L.yyyy H:mm'),
+      createdAt: format(task.createdAt, TIME_ON_CARDS ),
+      expiresAt: format(task.expiresAt, TIME_ON_CARDS),
       done: task.done,
     };
   });
