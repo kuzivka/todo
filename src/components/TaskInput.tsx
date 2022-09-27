@@ -5,8 +5,8 @@ import {
   KeyboardEventHandler,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { TextField } from '@mui/material';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import { MenuItem, Select, TextField } from '@mui/material';
+import { AddBox, SortOutlined } from '@mui/icons-material';
 import { addTodo, filterTodoList } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
@@ -39,6 +39,20 @@ export default function TaskInput() {
 
   return (
     <div className="task-input-container">
+      <SortOutlined  />
+      <Select
+      className=''
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value=''
+
+          label="Sorting"
+          // onChange={}
+        >
+          <MenuItem  value='createdAt'>Creation Date</MenuItem>
+          <MenuItem value='task'>Alphabetically</MenuItem>
+
+        </Select>
       <TextField
         className="task-input-field"
         value={taskValue}
@@ -50,7 +64,7 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddBoxIcon className="add-button-icon" onClick={toggleModalOpen} />
+      <AddBox className="add-button-icon" onClick={toggleModalOpen} />
       {isModalOpen && (
         <AddNewTodoModal open={isModalOpen} onClose={toggleModalOpen} />
       )}

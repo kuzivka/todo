@@ -5,6 +5,7 @@ import {
   EDIT_TODO,
   FILTER_TODO,
   DELETE_COMPLETED,
+  SORT_TODO,
 } from './actions';
 
 export const addTodo = (task: ToDo) => {
@@ -35,13 +36,17 @@ export const editTodo = (task: ToDo) => {
   };
 };
 
-export const filterTodoList = (show: string) => {
+export const filterTodoList = (filterBy: TaskToShow) => {
   return {
     type: FILTER_TODO,
-    payload: show,
+    payload: filterBy,
   };
 };
 
 export const deleteComletedFromTodoList = () => {
   return { type: DELETE_COMPLETED };
+};
+
+export const sortTodoList = (sortBy: SortingOption) => {
+  return { type: SORT_TODO, payload: sortBy };
 };

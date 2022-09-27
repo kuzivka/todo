@@ -17,7 +17,8 @@ import {
 const initialState: ToDoState = {
   tasks: [],
   sortBy: 'createdAt',
-  show: 'all',
+  filterBy: 'all',
+  searchQuery: '',
 };
 
 export const todoReducer = (
@@ -62,12 +63,12 @@ export const todoReducer = (
       return newState;
     }
     case FILTER_TODO: {
-      const newState = { ...state, show: action.payload };
+      const newState: ToDoState = { ...state, filterBy: action.payload };
       return newState;
     }
     case DELETE_COMPLETED: {
       const newListOfTasks = state.tasks.filter((task) => task.done === false);
-      return {...state, tasks: newListOfTasks}
+      return { ...state, tasks: newListOfTasks };
     }
     default:
       return state;

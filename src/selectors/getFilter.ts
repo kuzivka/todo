@@ -1,3 +1,3 @@
-import { Selector } from "react-redux";
+import { Selector } from 'react-redux';
 
-export const getFilter: Selector<ToDoState, string> =(state)=>state.show;
+export const getFilter: Selector<ToDoState, TaskToShow> = (state) => state.filterBy;

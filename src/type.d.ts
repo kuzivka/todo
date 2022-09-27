@@ -7,12 +7,13 @@ interface ToDo {
 }
 
 type SortingOption = 'task' | 'createdAt';
-type TaskToShow = 'all' | 'active' | 'completed'
+type TaskToShow = 'all' | 'active' | 'completed';
 
 interface ToDoState {
   tasks: ToDo[];
   sortBy: SortingOption;
-  show: TaskToShow;
+  filterBy: TaskToShow;
+  searchQuery: string;
 }
 
 interface TodoToShow {

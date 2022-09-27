@@ -19,12 +19,12 @@ export default function FilterBar() {
     dispatch(filterTodoList('all'));
   }, [dispatch]);
 
-  const buttons = ['all', 'completed', 'active'];
+  const buttons: TaskToShow[] = ['all', 'completed', 'active'];
 
   return (
     <Box className="filter-buttons-container">
       {buttons.map((button) => (
-        <FilterBtn filterState={filterState} show={button} />
+        <FilterBtn key={button} filterState={filterState} show={button} />
       ))}
 
       <Button size="small" variant="outlined" onClick={handleDeleteAllClick}>

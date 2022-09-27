@@ -4,7 +4,7 @@ import { filterTodoList } from '../actions/actionCreators';
 
 interface FilterBtnProps {
   filterState: string;
-  show: string;
+  show: TaskToShow;
 }
 
 export default function FilterBtn(props: FilterBtnProps) {
