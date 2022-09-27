@@ -4,16 +4,18 @@ import {
   ChangeEventHandler,
   KeyboardEventHandler,
 } from 'react';
-import { useDispatch } from 'react-redux';
-import { MenuItem, Select, TextField } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { AddBox, SortOutlined } from '@mui/icons-material';
-import { addTodo, filterTodoList } from '../actions/actionCreators';
+import { addTodo, filterTodoList, sortTodoList } from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
+import { getSortingOption } from '../selectors/getSortingOption';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [taskValue, setTaskValue] = useState('');
+  const sortOption = useSelector(getSortingOption);
   const dispatch = useDispatch();
 
   const taskValueChangeHandler: ChangeEventHandler<HTMLInputElement> =
@@ -37,22 +39,30 @@ export default function TaskInput() {
     [dispatch, taskValue]
   );
 
+  const selectHandler = useCallback(
+    (event: SelectChangeEvent<SortingOption>) => {
+      dispatch(sortTodoList(event.target.value as SortingOption));
+    }, [dispatch]
+  );
+
   return (
     <div className="task-input-container">
-      <SortOutlined  />
       <Select
-      className=''
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value=''
-
-          label="Sorting"
-          // onChange={}
-        >
-          <MenuItem  value='createdAt'>Creation Date</MenuItem>
-          <MenuItem value='task'>Alphabetically</MenuItem>
-
-        </Select>
+        className=""
+        sx={{
+          marginRight: '10px',
+          '.MuiSelect-iconOpen': { transform: 'none' },
+        }}
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={sortOption}
+        IconComponent={SortOutlined}
+        label="Sorting"
+        onChange={selectHandler}
+      >
+        <MenuItem value="createdAt">Creation Date</MenuItem>
+        <MenuItem value="task">Alphabetically</MenuItem>
+      </Select>
       <TextField
         className="task-input-field"
         value={taskValue}
