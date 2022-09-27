@@ -1,30 +1,26 @@
 import { Button } from '@mui/material';
-import { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterTodoList } from '../actions/actionCreators';
 
 interface FilterBtnProps {
-  isActive: boolean;
-  title: string;
+  filterState: string;
   show: string;
-  setActive: Dispatch<SetStateAction<string>>;
 }
 
 export default function FilterBtn(props: FilterBtnProps) {
-  const { title, show, isActive, setActive } = props;
+  const { show, filterState } = props;
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(filterTodoList(show));
-    setActive(title);
   };
   return (
     <Button
-      className={isActive ? 'active-button' : ''}
+      className={filterState === show ? 'active-button' : ''}
       size="small"
       onClick={handleClick}
     >
-      {title}
+      {show}
     </Button>
   );
 }
