@@ -1,4 +1,10 @@
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_DONE } from './actions';
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+  FILTER_TODO,
+  TOGGLE_DONE,
+} from './actions';
 
 export interface ToDoAction {
   type: typeof ADD_TODO | typeof EDIT_TODO;
@@ -13,4 +19,9 @@ export interface ToggleDoneAction {
 export interface DeleteTodoAction {
   type: typeof DELETE_TODO;
   payload: string;
+}
+
+export interface FilterTodoAction {
+  type: typeof FILTER_TODO;
+  payload: TaskToShow;
 }
