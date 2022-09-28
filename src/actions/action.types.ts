@@ -1,4 +1,12 @@
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_DONE } from './actions';
+import {
+  ADD_TODO,
+  DELETE_COMPLETED,
+  DELETE_TODO,
+  EDIT_TODO,
+  FILTER_TODO,
+  SORT_TODO,
+  TOGGLE_DONE,
+} from './actions';
 
 export interface ToDoAction {
   type: typeof ADD_TODO | typeof EDIT_TODO;
@@ -13,4 +21,18 @@ export interface ToggleDoneAction {
 export interface DeleteTodoAction {
   type: typeof DELETE_TODO;
   payload: string;
+}
+
+export interface FilterTodoAction {
+  type: typeof FILTER_TODO;
+  payload: TaskToShow;
+}
+
+export interface DeleteComletedAction {
+  type: typeof DELETE_COMPLETED;
+}
+
+export interface SortTodoAction {
+  type: typeof SORT_TODO;
+  payload: SortingOption;
 }

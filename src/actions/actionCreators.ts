@@ -1,4 +1,12 @@
-import { ADD_TODO, TOGGLE_DONE, DELETE_TODO, EDIT_TODO } from './actions';
+import {
+  ADD_TODO,
+  TOGGLE_DONE,
+  DELETE_TODO,
+  EDIT_TODO,
+  FILTER_TODO,
+  DELETE_COMPLETED,
+  SORT_TODO,
+} from './actions';
 
 export const addTodo = (task: ToDo) => {
   return {
@@ -26,4 +34,19 @@ export const editTodo = (task: ToDo) => {
     type: EDIT_TODO,
     payload: task,
   };
+};
+
+export const filterTodoList = (filterBy: TaskToShow) => {
+  return {
+    type: FILTER_TODO,
+    payload: filterBy,
+  };
+};
+
+export const deleteComletedFromTodoList = () => {
+  return { type: DELETE_COMPLETED };
+};
+
+export const sortTodoList = (sortBy: SortingOption) => {
+  return { type: SORT_TODO, payload: sortBy };
 };

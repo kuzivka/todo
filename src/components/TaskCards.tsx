@@ -1,5 +1,5 @@
-import { List } from '@mui/material';
-import { useState, useCallback } from 'react';
+import { List, Typography } from '@mui/material';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getTaskListToShowSelector } from '../selectors/getTaskListToShowSelector';
 import { EditTodoModal } from './EditTodoModal';
@@ -26,6 +26,11 @@ export default function TaskCards() {
           open={!!taskToEditId}
           onClose={resetTaskId}
         />
+      )}
+      {!tasks.length && (
+        <Typography variant="subtitle1" className="no-item-title">
+          There are no items
+        </Typography>
       )}
     </>
   );

@@ -2,23 +2,33 @@ import {
   ToDoAction,
   ToggleDoneAction,
   DeleteTodoAction,
+  FilterTodoAction,
+  DeleteComletedAction,
 } from '../actions/action.types';
 import {
   ADD_TODO,
+  DELETE_COMPLETED,
   DELETE_TODO,
   EDIT_TODO,
+  FILTER_TODO,
   TOGGLE_DONE,
 } from '../actions/actions';
 
 const initialState: ToDoState = {
   tasks: [],
   sortBy: 'createdAt',
-  hideDone: false,
+  filterBy: 'all',
+  searchQuery: '',
 };
 
 export const todoReducer = (
   state: ToDoState = initialState,
-  action: ToDoAction | ToggleDoneAction | DeleteTodoAction
+  action:
+    | ToDoAction
+    | ToggleDoneAction
+    | DeleteTodoAction
+    | FilterTodoAction
+    | DeleteComletedAction
 ): ToDoState => {
   switch (action.type) {
     case ADD_TODO: {
@@ -51,6 +61,14 @@ export const todoReducer = (
       });
       const newState = { ...state, tasks: updatedTasks };
       return newState;
+    }
+    case FILTER_TODO: {
+      const newState: ToDoState = { ...state, filterBy: action.payload };
+      return newState;
+    }
+    case DELETE_COMPLETED: {
+      const newListOfTasks = state.tasks.filter((task) => !task.done);
+      return { ...state, tasks: newListOfTasks };
     }
     default:
       return state;

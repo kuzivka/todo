@@ -38,6 +38,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.no-item-title {
+  color: #ddd;
+}
+.sort-icon {
+  width: 70px !important;
+  font-size: 60px !important;
+}
+.active-button {
+  background-color: #ddd !important;
+}
 .modal-box {
   position: absolute;
   display: flex;

@@ -3,7 +3,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { addDays } from 'date-fns';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { TIME_IN_MODAL } from './constants';
+import { TIME_IN_MODAL } from '../constants';
 
 interface ITaskViewModalProps {
   open: boolean;
@@ -18,7 +18,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
 
   const { open, initialTask, onClose, onSave } = props;
 
-  const [taskValue, setTaskValue] = useState(initialTask?.task);
+  const [taskValue, setTaskValue] = useState(initialTask?.task ?? '');
   const [expirationDate, setExpirationDate] = useState<number>(
     initialTask?.expiresAt ? initialTask.expiresAt : oneDayAdvanceDate.valueOf()
   );

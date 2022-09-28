@@ -1,11 +1,23 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
-import { TIME_ON_CARDS } from '../components/constants';
+import { TIME_ON_CARDS } from '../constants';
+import { filterListBy } from '../enums';
+
+const applyFiltering = (filterBy: TaskToShow) => (task: ToDo) => {
+  if (filterBy === filterListBy.active) {
+    return !task.done;
+  }
+  if (filterBy === filterListBy.comleted) {
+    return task.done;
+  }
+  return true;
+};
 
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state
 ) => {
-  return state.tasks.map((task) => {
+  const filterByFunc = applyFiltering(state.filterBy);
+  return state.tasks.filter(filterByFunc).map((task) => {
     return {
       id: task.id,
       task: task.task,

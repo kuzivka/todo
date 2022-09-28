@@ -1,4 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import FilterBar from './components/FilterBar';
 import Header from './components/Header';
 import './components/styles/style.scss';
 import TaskCards from './components/TaskCards';
@@ -9,7 +10,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
+        
         <TaskInput />
+        <FilterBar />
         <TaskCards />
       </div>
     </ThemeProvider>

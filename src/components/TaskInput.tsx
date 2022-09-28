@@ -1,13 +1,14 @@
+import { AddBox } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 import {
-  useState,
-  useCallback,
   ChangeEventHandler,
   KeyboardEventHandler,
+  useCallback,
+  useState,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { TextField } from '@mui/material';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import { addTodo } from '../actions/actionCreators';
+import { addTodo, filterTodoList } from '../actions/actionCreators';
+import { filterListBy } from '../enums';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 
@@ -31,6 +32,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
+        dispatch(filterTodoList(filterListBy.all));
       }
     },
     [dispatch, taskValue]
@@ -49,7 +51,7 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddBoxIcon className="add-button-icon" onClick={toggleModalOpen} />
+      <AddBox className="add-button-icon" onClick={toggleModalOpen} />
       {isModalOpen && (
         <AddNewTodoModal open={isModalOpen} onClose={toggleModalOpen} />
       )}
