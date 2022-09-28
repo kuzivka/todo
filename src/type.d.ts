@@ -19,6 +19,7 @@ interface ToDoState {
 interface TodoToShow {
   id: string;
   task: string;
+  createdAt: string;
   expiresAt: string;
   done: boolean;
 }

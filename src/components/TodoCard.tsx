@@ -10,7 +10,7 @@ interface ITodoCardProps {
 }
 
 export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
-  const { id, task: taskValue, done, expiresAt } = task;
+  const { id, task: taskValue, done, expiresAt, createdAt } = task;
 
   const dispatch = useDispatch();
 
@@ -31,9 +31,10 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
       <ListItem className="task-card">
         <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
         <ListItemText
-          className={done ? 'disabled-task' : ''}
+        
+          className={done ? 'disabled-task card-date' : 'card-date'}
           primary={taskValue}
-          secondary={`Expires at: ${expiresAt}`}
+          secondary={`Created at: ${createdAt}\nExpires at: ${expiresAt}`}
         />
         <IconButton onClick={handleIconButtonClick}>
           <Edit fontSize="small" />

@@ -38,7 +38,9 @@
   align-items: center;
   justify-content: center;
 }
-
+.card-date {
+  white-space: break-spaces;
+}
 .select-input {
   visibility: hidden;
   width: 0;
@@ -48,7 +50,7 @@
   color: #ddd;
 }
 
-.search-field{
+.search-field {
   font-size: 10px;
   margin: 0 8px !important;
   width: 150px;

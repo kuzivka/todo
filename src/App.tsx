@@ -10,7 +10,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        
         <TaskInput />
         <FilterBar />
         <TaskCards />
