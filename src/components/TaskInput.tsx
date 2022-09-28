@@ -1,8 +1,10 @@
+import { AddBox } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 import {
-  useState,
-  useCallback,
   ChangeEventHandler,
   KeyboardEventHandler,
+  useCallback,
+  useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
@@ -38,7 +40,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
-        dispatch(filterTodoList('all'));
+        dispatch(filterTodoList(filterListBy.all));
       }
     },
     [dispatch, taskValue]
