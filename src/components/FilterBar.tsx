@@ -22,7 +22,7 @@ export default function FilterBar() {
 
   const handleSearchFieldChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      dispatch(searchTodo(event.target.value))
+      dispatch(searchTodo(event.target.value));
     },
     [dispatch]
   );
@@ -33,7 +33,8 @@ export default function FilterBar() {
     <Box className="filter-buttons-container">
       <TextField
         id="standard-basic"
-        label="Search"
+        className="search-field"
+        placeholder="Search"
         variant="standard"
         onChange={handleSearchFieldChange}
       />
