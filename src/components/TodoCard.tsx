@@ -1,6 +1,6 @@
 import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
-import { Dispatch, Fragment, SetStateAction, useCallback } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTodo, toggleDone } from '../actions/actionCreators';
 
@@ -27,7 +27,7 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
   };
 
   return (
-    <Fragment>
+    <>
       <ListItem className="task-card">
         <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
         <ListItemText
@@ -42,6 +42,6 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
           <Clear fontSize="medium" />
         </IconButton>
       </ListItem>
-    </Fragment>
+    </>
   );
 }
