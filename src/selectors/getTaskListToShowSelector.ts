@@ -1,12 +1,13 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 import { TIME_ON_CARDS } from '../constants';
+import { filterListBy } from '../enums';
 
 const applyFiltering = (filterBy: TaskToShow) => (task: ToDo) => {
-  if (filterBy === 'active') {
+  if (filterBy === filterListBy.active) {
     return !task.done;
   }
-  if (filterBy === 'completed') {
+  if (filterBy === filterListBy.comleted) {
     return task.done;
   }
   return true;
