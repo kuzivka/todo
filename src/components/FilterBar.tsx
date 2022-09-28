@@ -1,10 +1,11 @@
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteComletedFromTodoList,
   filterTodoList,
+  searchTodo,
 } from '../actions/actionCreators';
 import { getFilter } from '../selectors/getFilter';
 import FilterBtn from './FilterBtn';
@@ -19,10 +20,23 @@ export default function FilterBar() {
     dispatch(filterTodoList('all'));
   }, [dispatch]);
 
+  const handleSearchFieldChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      dispatch(searchTodo(event.target.value))
+    },
+    [dispatch]
+  );
+
   const buttons: TaskToShow[] = ['all', 'completed', 'active'];
 
   return (
     <Box className="filter-buttons-container">
+      <TextField
+        id="standard-basic"
+        label="Search"
+        variant="standard"
+        onChange={handleSearchFieldChange}
+      />
       {buttons.map((button) => (
         <FilterBtn key={button} filterState={filterState} show={button} />
       ))}
