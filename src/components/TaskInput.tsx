@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo, filterTodoList } from '../actions/actionCreators';
+import { filterListBy } from '../enums';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 
@@ -31,7 +32,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
-        dispatch(filterTodoList('all'));
+        dispatch(filterTodoList(filterListBy.all));
       }
     },
     [dispatch, taskValue]
