@@ -6,8 +6,12 @@ import {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { AddBox, SortOutlined } from '@mui/icons-material';
-import { addTodo, filterTodoList, sortTodoList } from '../actions/actionCreators';
+import { AddBox, Sort, SortOutlined } from '@mui/icons-material';
+import {
+  addTodo,
+  filterTodoList,
+  sortTodoList,
+} from '../actions/actionCreators';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 import { getSortingOption } from '../selectors/getSortingOption';
@@ -15,6 +19,7 @@ import { getSortingOption } from '../selectors/getSortingOption';
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [taskValue, setTaskValue] = useState('');
+  const [isOptionsOpen, setOpen] = useState(false);
   const sortOption = useSelector(getSortingOption);
   const dispatch = useDispatch();
 
@@ -42,17 +47,23 @@ export default function TaskInput() {
   const selectHandler = useCallback(
     (event: SelectChangeEvent<SortingOption>) => {
       dispatch(sortTodoList(event.target.value as SortingOption));
-    }, [dispatch]
+      setOpen(!isOptionsOpen);
+    },
+    [dispatch, isOptionsOpen]
   );
+
+  const togleOpenSortingOptins = () => {
+    setOpen(!isOptionsOpen);
+  };
 
   return (
     <div className="task-input-container">
+      <Sort className="sort-icon" onClick={togleOpenSortingOptins} />
       <Select
-        className=""
-        sx={{
-          marginRight: '10px',
-          '.MuiSelect-iconOpen': { transform: 'none' },
-        }}
+        open={isOptionsOpen}
+        onClose={togleOpenSortingOptins}
+        onOpen={togleOpenSortingOptins}
+        className="select-input"
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={sortOption}
