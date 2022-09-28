@@ -17,7 +17,7 @@ export default function FilterBar() {
 
   const handleDeleteAllClick = useCallback(() => {
     dispatch(deleteComletedFromTodoList());
-    dispatch(filterTodoList('all'));
+    dispatch(filterTodoList(filterListBy.all));
   }, [dispatch]);
 
   const buttons = Object.values(filterListBy).map((option) => option);

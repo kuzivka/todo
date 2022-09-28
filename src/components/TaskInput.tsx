@@ -1,5 +1,3 @@
-import { AddBox } from '@mui/icons-material';
-import { TextField } from '@mui/material';
 import {
   ChangeEventHandler,
   KeyboardEventHandler,
@@ -17,6 +15,7 @@ import {
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 import { getSortingOption } from '../selectors/getSortingOption';
+import { filterListBy } from '../enums';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
