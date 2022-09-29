@@ -6,6 +6,7 @@ import {
   FILTER_TODO,
   DELETE_COMPLETED,
   SORT_TODO,
+  SEARCH_TODO,
 } from './actions';
 
 export const addTodo = (task: ToDo) => {
@@ -49,4 +50,8 @@ export const deleteComletedFromTodoList = () => {
 
 export const sortTodoList = (sortBy: SortingOption) => {
   return { type: SORT_TODO, payload: sortBy };
+};
+
+export const searchTodo = (searchQuery: string) => {
+  return { type: SEARCH_TODO, payload: searchQuery };
 };

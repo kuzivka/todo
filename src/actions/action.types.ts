@@ -4,6 +4,7 @@ import {
   DELETE_TODO,
   EDIT_TODO,
   FILTER_TODO,
+  SEARCH_TODO,
   SORT_TODO,
   TOGGLE_DONE,
 } from './actions';
@@ -35,4 +36,9 @@ export interface DeleteComletedAction {
 export interface SortTodoAction {
   type: typeof SORT_TODO;
   payload: SortingOption;
+}
+
+export interface SearchTodoAction {
+  type: typeof SEARCH_TODO;
+  payload: string;
 }

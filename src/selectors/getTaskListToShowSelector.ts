@@ -23,12 +23,17 @@ const applySorting = (sortBy: SortingOption) => (a: ToDo, b: ToDo) => {
   return 0;
 };
 
+const applySearch = (searchQuery: string) => (task: ToDo) => {
+  return task.task.toLowerCase().includes(searchQuery.toLowerCase());
+}
+
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state
 ) => {
   const filterByFunc = applyFiltering(state.filterBy);
   const sortyByFunc = applySorting(state.sortBy);
   return state.tasks
+    .filter(applySearch(state.searchQuery))
     .filter(filterByFunc)
     .sort(sortyByFunc)
     .map((task) => {

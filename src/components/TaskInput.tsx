@@ -1,21 +1,21 @@
+import { AddBox, Sort, SortOutlined } from '@mui/icons-material';
+import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import {
   ChangeEventHandler,
   KeyboardEventHandler,
   useCallback,
-  useState,
+  useState
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { AddBox, Sort, SortOutlined } from '@mui/icons-material';
 import {
   addTodo,
   filterTodoList,
-  sortTodoList,
+  sortTodoList
 } from '../actions/actionCreators';
+import { filterListBy } from '../enums';
+import { getSortingOption } from '../selectors/getSortingOption';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
-import { getSortingOption } from '../selectors/getSortingOption';
-import { filterListBy } from '../enums';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
