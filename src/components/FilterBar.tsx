@@ -3,10 +3,10 @@ import { Box } from '@mui/system';
 import { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  deleteComletedFromTodoList,
-  filterTodoList,
+  deleteCompletedTodo,
+  filterTodo,
   searchTodo
-} from '../actions/actionCreators';
+} from '../reducers/reducer';
 import { filterListBy } from '../enums';
 import { getFilter } from '../selectors/getFilter';
 import FilterBtn from './FilterBtn';
@@ -17,8 +17,8 @@ export default function FilterBar() {
   const filterState = useSelector(getFilter);
 
   const handleDeleteAllClick = useCallback(() => {
-    dispatch(deleteComletedFromTodoList());
-    dispatch(filterTodoList(filterListBy.all));
+    dispatch(deleteCompletedTodo());
+    dispatch(filterTodo(filterListBy.all));
   }, [dispatch]);
 
   const handleSearchFieldChange = useCallback(

@@ -9,9 +9,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addTodo,
-  filterTodoList,
-  sortTodoList
-} from '../actions/actionCreators';
+  filterTodo,
+  sortTodo
+} from '../reducers/reducer';
 import { filterListBy } from '../enums';
 import { getSortingOption } from '../selectors/getSortingOption';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
@@ -39,7 +39,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
-        dispatch(filterTodoList(filterListBy.all));
+        dispatch(filterTodo(filterListBy.all));
       }
     },
     [dispatch, taskValue]
@@ -47,7 +47,7 @@ export default function TaskInput() {
 
   const selectHandler = useCallback(
     (event: SelectChangeEvent<SortingOption>) => {
-      dispatch(sortTodoList(event.target.value as SortingOption));
+      dispatch(sortTodo(event.target.value as SortingOption));
       setOpen(!isOptionsOpen);
     },
     [dispatch, isOptionsOpen]

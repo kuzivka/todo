@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo, filterTodoList } from '../actions/actionCreators';
+import { addTodo, filterTodo } from '../reducers/reducer';
 import { filterListBy } from '../enums';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { TaskViewModal } from './TaskViewModal';
@@ -17,7 +17,7 @@ export function AddNewTodoModal(props: IAddNewTodoModalProps) {
   const handleSave = useCallback(
     (taskValue: string, expirationDate: number) => {
       dispatch(addTodo(getNewTaskObject(taskValue, expirationDate.valueOf())));
-      dispatch(filterTodoList(filterListBy.all));
+      dispatch(filterTodo(filterListBy.all));
       onClose();
     },
     [dispatch, onClose]

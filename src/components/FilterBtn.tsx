@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { filterTodoList } from '../actions/actionCreators';
+import { filterTodo } from '../reducers/reducer';
 import { filterListBy } from '../enums';
 
 interface FilterBtnProps {
@@ -13,7 +13,7 @@ export default function FilterBtn(props: FilterBtnProps) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(filterTodoList(show as TaskToShow));
+    dispatch(filterTodo(show as TaskToShow));
   };
   return (
     <Button

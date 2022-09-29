@@ -2,7 +2,7 @@ import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTodo, toggleDone } from '../actions/actionCreators';
+import { deleteTodo, toggleDone} from '../reducers/reducer';
 
 interface ITodoCardProps {
   task: TodoToShow;
