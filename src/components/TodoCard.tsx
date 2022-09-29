@@ -31,7 +31,6 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
       <ListItem className="task-card">
         <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
         <ListItemText
-        
           className={done ? 'disabled-task card-date' : 'card-date'}
           primary={taskValue}
           secondary={`Created at: ${createdAt}\nExpires at: ${expiresAt}`}

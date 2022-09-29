@@ -58,7 +58,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
           variant="outlined"
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DateTimePicker
+          <DateTimePicker
             disabled
             renderInput={(props) => <TextField {...props} />}
             label="Creation Date"
@@ -66,7 +66,6 @@ export function TaskViewModal(props: ITaskViewModalProps) {
             inputFormat={TIME_IN_MODAL}
             onChange={onDatePicking}
             value={initialTask?.createdAt}
-            
           />
           <DateTimePicker
             minDateTime={minDate}

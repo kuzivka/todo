@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteComletedFromTodoList,
   filterTodoList,
-  searchTodo,
+  searchTodo
 } from '../actions/actionCreators';
 import { filterListBy } from '../enums';
 import { getFilter } from '../selectors/getFilter';
