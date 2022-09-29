@@ -4,6 +4,7 @@ import {
   DeleteTodoAction,
   FilterTodoAction,
   DeleteComletedAction,
+  SortTodoAction,
 } from '../actions/action.types';
 import {
   ADD_TODO,
@@ -11,6 +12,7 @@ import {
   DELETE_TODO,
   EDIT_TODO,
   FILTER_TODO,
+  SORT_TODO,
   TOGGLE_DONE,
 } from '../actions/actions';
 
@@ -29,6 +31,7 @@ export const todoReducer = (
     | DeleteTodoAction
     | FilterTodoAction
     | DeleteComletedAction
+    | SortTodoAction
 ): ToDoState => {
   switch (action.type) {
     case ADD_TODO: {
@@ -69,6 +72,10 @@ export const todoReducer = (
     case DELETE_COMPLETED: {
       const newListOfTasks = state.tasks.filter((task) => !task.done);
       return { ...state, tasks: newListOfTasks };
+    }
+    case SORT_TODO: {
+      const newState = { ...state, sortBy: action.payload };
+      return newState;
     }
     default:
       return state;

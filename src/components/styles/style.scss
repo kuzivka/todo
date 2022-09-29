@@ -39,12 +39,18 @@
   justify-content: center;
 }
 
+.select-input {
+  visibility: hidden;
+  width: 0;
+  margin-right: 10px;
+}
 .no-item-title {
   color: #ddd;
 }
 .sort-icon {
-  width: 70px !important;
-  font-size: 60px !important;
+  font-size: 50px !important;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 .active-button {
   background-color: #ddd !important;

@@ -3,4 +3,7 @@ export enum filterListBy {
   comleted = 'completed',
   active = 'active',
 }
-
+export enum sortListBy {
+  createdAt = 'createdAt',
+  task = 'task',
+}
