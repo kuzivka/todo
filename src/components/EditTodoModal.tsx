@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editTodo, filterTodoList } from '../actions/actionCreators';
+import { editTodo, filterTodo } from '../reducers/reducer';
 import { filterListBy } from '../enums';
 import { getTaskToEdit } from '../selectors/getTaskToEdit';
 import { TaskViewModal } from './TaskViewModal';
@@ -28,7 +28,7 @@ export function EditTodoModal(props: EditTodoModalProps) {
           done: false,
         })
       );
-      dispatch(filterTodoList(filterListBy.all));
+      dispatch(filterTodo(filterListBy.all));
       onClose();
     },
     [dispatch, onClose, taskToEdit]
