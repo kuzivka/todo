@@ -1,22 +1,23 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 import { TIME_ON_CARDS } from '../constants';
+import { filterListBy, sortListBy } from '../enums';
 
 const applyFiltering = (filterBy: TaskToShow) => (task: ToDo) => {
-  if (filterBy === 'active') {
+  if (filterBy === filterListBy.active) {
     return !task.done;
   }
-  if (filterBy === 'completed') {
+  if (filterBy === filterListBy.comleted) {
     return task.done;
   }
   return true;
 };
 
 const applySorting = (sortBy: SortingOption) => (a: ToDo, b: ToDo) => {
-  if (sortBy === 'createdAt') {
+  if (sortBy === sortListBy.createdAt) {
     return b.createdAt - a.createdAt;
   }
-  if (sortBy === 'task') {
+  if (sortBy === sortListBy.task) {
     return a.task.localeCompare(b.task);
   }
   return 0;

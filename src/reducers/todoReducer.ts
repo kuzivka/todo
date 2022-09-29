@@ -73,7 +73,7 @@ export const todoReducer = (
       return newState;
     }
     case DELETE_COMPLETED: {
-      const newListOfTasks = state.tasks.filter((task) => task.done === false);
+      const newListOfTasks = state.tasks.filter((task) => !task.done);
       return { ...state, tasks: newListOfTasks };
     }
     case SORT_TODO: {

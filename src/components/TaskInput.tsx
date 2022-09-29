@@ -1,8 +1,8 @@
 import {
-  useState,
-  useCallback,
   ChangeEventHandler,
   KeyboardEventHandler,
+  useCallback,
+  useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
@@ -15,6 +15,7 @@ import {
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { AddNewTodoModal } from './AddNewTodoModal';
 import { getSortingOption } from '../selectors/getSortingOption';
+import { filterListBy } from '../enums';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function TaskInput() {
         event.preventDefault();
         dispatch(addTodo(getNewTaskObject(taskValue)));
         setTaskValue('');
-        dispatch(filterTodoList('all'));
+        dispatch(filterTodoList(filterListBy.all));
       }
     },
     [dispatch, taskValue]

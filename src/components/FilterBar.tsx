@@ -7,6 +7,7 @@ import {
   filterTodoList,
   searchTodo,
 } from '../actions/actionCreators';
+import { filterListBy } from '../enums';
 import { getFilter } from '../selectors/getFilter';
 import FilterBtn from './FilterBtn';
 
@@ -17,7 +18,7 @@ export default function FilterBar() {
 
   const handleDeleteAllClick = useCallback(() => {
     dispatch(deleteComletedFromTodoList());
-    dispatch(filterTodoList('all'));
+    dispatch(filterTodoList(filterListBy.all));
   }, [dispatch]);
 
   const handleSearchFieldChange = useCallback(
@@ -27,7 +28,7 @@ export default function FilterBar() {
     [dispatch]
   );
 
-  const buttons: TaskToShow[] = ['all', 'completed', 'active'];
+  const buttons = Object.values(filterListBy).map((option) => option);
 
   return (
     <Box className="filter-buttons-container">
