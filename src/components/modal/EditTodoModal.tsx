@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editTodo } from '../store/reducers/todoSlice';
-import { filterTodo } from '../store/reducers/todoListSlice';
-import { filterListBy } from '../enums';
-import { getTaskToEdit } from '../selectors/getTaskToEdit';
+import { editTodo } from '../../store/reducers/todoSlice';
+import { filterTodo } from '../../store/reducers/todoListSlice';
+import { filterListBy } from '../../enums';
+import { getTaskToEdit } from '../../selectors/getTaskToEdit';
 import { TaskViewModal } from './TaskViewModal';
-import { ToDoState } from '../store/store';
+import { ToDoState } from '../../store/store';
 
 interface EditTodoModalProps {
   open: boolean;

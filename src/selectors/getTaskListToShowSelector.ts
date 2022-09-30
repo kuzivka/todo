@@ -26,7 +26,7 @@ const applySorting = (sortBy: SortingOption) => (a: ToDo, b: ToDo) => {
 
 const applySearch = (searchQuery: string) => (task: ToDo) => {
   return task.task.toLowerCase().includes(searchQuery.toLowerCase());
-}
+};
 
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state

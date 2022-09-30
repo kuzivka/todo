@@ -1,18 +1,12 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import FilterBar from './components/FilterBar';
-import Header from './components/Header';
-import './components/styles/style.scss';
-import TaskCards from './components/TaskCards';
-import TaskInput from './components/TaskInput';
+import TodoAplication from './pages/TodoAplication';
+import './styles/style.scss';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Header />
-        <TaskInput />
-        <FilterBar />
-        <TaskCards />
+        <TodoAplication />
       </div>
     </ThemeProvider>
   );

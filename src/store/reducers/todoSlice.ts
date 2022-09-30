@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const todoSlice = createSlice({
   name: 'todo',
   initialState: {
-    tasks: [] as ToDo[]
+    tasks: [] as ToDo[],
   },
   reducers: {
     addTodo: (state, action) => {
@@ -37,4 +37,10 @@ export const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
-export const { addTodo, toggleDone, deleteTodo, editTodo, deleteCompletedTodo} = todoSlice.actions;
+export const {
+  addTodo,
+  toggleDone,
+  deleteTodo,
+  editTodo,
+  deleteCompletedTodo,
+} = todoSlice.actions;

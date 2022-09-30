@@ -2,7 +2,7 @@ import { Clear, Edit } from '@mui/icons-material';
 import { Checkbox, IconButton, ListItem, ListItemText } from '@mui/material';
 import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTodo, toggleDone} from '../store/reducers/todoSlice';
+import { deleteTodo, toggleDone } from '../../store/reducers/todoSlice';
 
 interface ITodoCardProps {
   task: TodoToShow;
@@ -28,10 +28,16 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
 
   return (
     <>
-      <ListItem className="task-card">
+      <ListItem
+        sx={{
+          border: '1px solid #ddd',
+          borderBottom: 'none',
+          '&:last-child': { border: '1px solid #ddd' },
+        }}
+      >
         <Checkbox edge="start" onChange={handleCheckboxChange} checked={done} />
         <ListItemText
-          className={done ? 'disabled-task card-date' : 'card-date'}
+          sx={[{ whiteSpace: 'break-spaces' }, done && styleForDisabledTask]}
           primary={taskValue}
           secondary={`Created at: ${createdAt}\nExpires at: ${expiresAt}`}
         />
@@ -45,3 +51,11 @@ export default function TodoCard({ task, onEditClick }: ITodoCardProps) {
     </>
   );
 }
+
+const styleForDisabledTask = {
+  textDecorationLine: 'line-through',
+  color: '#ddd',
+  '.MuiListItemText-secondary': {
+    color: '#ddd',
+  },
+};

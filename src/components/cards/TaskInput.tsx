@@ -1,5 +1,11 @@
-import { AddBox, Sort, SortOutlined } from '@mui/icons-material';
-import { MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { AddBox, Sort } from '@mui/icons-material';
+import {
+  Box,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from '@mui/material';
 import {
   ChangeEventHandler,
   KeyboardEventHandler,
@@ -7,12 +13,12 @@ import {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../store/reducers/todoSlice';
-import { filterTodo, sortTodo } from '../store/reducers/todoListSlice';
-import { filterListBy } from '../enums';
-import { getSortingOption } from '../selectors/getSortingOption';
-import { getNewTaskObject } from '../utils/getNewTaskObject';
-import { AddNewTodoModal } from './AddNewTodoModal';
+import { addTodo } from '../../store/reducers/todoSlice';
+import { filterTodo, sortTodo } from '../../store/reducers/todoListSlice';
+import { filterListBy } from '../../enums';
+import { getSortingOption } from '../../selectors/getSortingOption';
+import { getNewTaskObject } from '../../utils/getNewTaskObject';
+import { AddNewTodoModal } from '../modal/AddNewTodoModal';
 
 export default function TaskInput() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -55,25 +61,32 @@ export default function TaskInput() {
   };
 
   return (
-    <div className="task-input-container">
-      <Sort className="sort-icon" onClick={togleOpenSortingOptins} />
+    <Box
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <Sort
+        sx={{
+          fontSize: '50px',
+          border: '1px solid black',
+          borderRadius: '3px',
+        }}
+        onClick={togleOpenSortingOptins}
+      />
       <Select
         open={isOptionsOpen}
         onClose={togleOpenSortingOptins}
         onOpen={togleOpenSortingOptins}
-        className="select-input"
+        sx={{ visibility: 'hidden', width: 0, mr: 1 }}
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={sortOption}
-        IconComponent={SortOutlined}
-        label="Sorting"
         onChange={selectHandler}
       >
         <MenuItem value="createdAt">Creation Date</MenuItem>
         <MenuItem value="task">Alphabetically</MenuItem>
       </Select>
       <TextField
-        className="task-input-field"
+        sx={{ width: 400, maxWidth: '80vw' }}
         value={taskValue}
         onChange={taskValueChangeHandler}
         color="primary"
@@ -83,10 +96,10 @@ export default function TaskInput() {
         onKeyDown={enterClickHandler}
       />
 
-      <AddBox className="add-button-icon" onClick={toggleModalOpen} />
+      <AddBox sx={{ fontSize: '70px' }} onClick={toggleModalOpen} />
       {isModalOpen && (
         <AddNewTodoModal open={isModalOpen} onClose={toggleModalOpen} />
       )}
-    </div>
+    </Box>
   );
 }

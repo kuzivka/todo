@@ -3,7 +3,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { addDays } from 'date-fns';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { TIME_IN_MODAL } from './constants';
+import { TIME_IN_MODAL } from '../constants';
 
 interface ITaskViewModalProps {
   open: boolean;
@@ -11,6 +11,22 @@ interface ITaskViewModalProps {
   onSave: (taskValue: string, expirationDate: number) => void;
   initialTask?: ToDo;
 }
+
+const stylesForModal = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  width: '400px',
+  height: '400px',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: '#fff',
+  border: '2px solid #2b2b2b',
+  boxShadow: 24,
+  p: 4,
+};
 
 export function TaskViewModal(props: ITaskViewModalProps) {
   const minDate = new Date();
@@ -44,7 +60,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <Box className="modal-box" sx={{ boxShadow: 24, p: 4 }}>
+      <Box className="modal-box" sx={{ ...stylesForModal }}>
         <Typography variant="h4" id="modal-title">
           Enter your task
         </Typography>
@@ -77,11 +93,12 @@ export function TaskViewModal(props: ITaskViewModalProps) {
             onChange={onDatePicking}
           />
         </LocalizationProvider>
+
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button onClick={onClose}>Close</Button>
           <Button disabled={!taskValue?.trim()} onClick={handleSave}>
             save
           </Button>
-          <Button onClick={onClose}>Close</Button>
         </Box>
       </Box>
     </Modal>
