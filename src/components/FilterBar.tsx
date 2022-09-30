@@ -3,10 +3,10 @@ import { Box } from '@mui/system';
 import { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  deleteCompletedTodo,
   filterTodo,
-  searchTodo
-} from '../reducers/reducer';
+  deleteCompletedTodo,
+  searchTodo,
+} from '../reducers/todoListSlice';
 import { filterListBy } from '../enums';
 import { getFilter } from '../selectors/getFilter';
 import FilterBtn from './FilterBtn';

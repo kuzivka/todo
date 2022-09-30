@@ -4,14 +4,11 @@ import {
   ChangeEventHandler,
   KeyboardEventHandler,
   useCallback,
-  useState
+  useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addTodo,
-  filterTodo,
-  sortTodo
-} from '../reducers/reducer';
+import { addTodo } from '../reducers/todoSlice';
+import { filterTodo, sortTodo } from '../reducers/todoListSlice';
 import { filterListBy } from '../enums';
 import { getSortingOption } from '../selectors/getSortingOption';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
