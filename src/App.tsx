@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TodoAplication from './pages/TodoAplication';
 import './styles/style.scss';
 
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
