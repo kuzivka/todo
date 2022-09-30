@@ -19,15 +19,21 @@ export const todoSlice = createSlice({
       }
     },
     deleteTodo: (state, action) => {
-      state.tasks.filter((task) => task.id !== action.payload);
+      const newListOfTasks = state.tasks.filter(
+        (task) => task.id !== action.payload
+      );
+      return { ...state, tasks: newListOfTasks };
     },
     editTodo: (state, action) => {
-      let taskToUpdate = state.tasks.find(
-        (task) => task.id === action.payload.id
-      );
-      if (taskToUpdate) {
-        taskToUpdate = action.payload;
-      }
+      const updatedTasks = state.tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return (task = action.payload);
+        } else {
+          return task;
+        }
+      });
+      const newState = { ...state, tasks: updatedTasks };
+      return newState;
     },
     deleteCompletedTodo: (state) => {
       const filteredArrayOfTasks = state.tasks.filter((task) => !task.done);
