@@ -1,7 +1,8 @@
 import { Selector } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
-import { TIME_ON_CARDS } from '../constants';
+import { TIME_ON_CARDS } from '../components/constants';
 import { filterListBy, sortListBy } from '../enums';
+import { ToDoState } from '../store/store';
 
 const applyFiltering = (filterBy: TaskToShow) => (task: ToDo) => {
   if (filterBy === filterListBy.active) {
@@ -30,10 +31,10 @@ const applySearch = (searchQuery: string) => (task: ToDo) => {
 export const getTaskListToShowSelector: Selector<ToDoState, TodoToShow[]> = (
   state
 ) => {
-  const filterByFunc = applyFiltering(state.filterBy);
-  const sortyByFunc = applySorting(state.sortBy);
-  return state.tasks
-    .filter(applySearch(state.searchQuery))
+  const filterByFunc = applyFiltering(state.todoList.filterBy);
+  const sortyByFunc = applySorting(state.todoList.sortBy);
+  return state.todo.tasks
+    .filter(applySearch(state.todoList.searchQuery))
     .filter(filterByFunc)
     .sort(sortyByFunc)
     .map((task) => {

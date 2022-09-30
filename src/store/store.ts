@@ -5,3 +5,5 @@ import todoListReducer from './reducers/todoListSlice';
 export const store = configureStore({
   reducer: { todo: todoReducer, todoList: todoListReducer },
 });
+
+export type ToDoState = ReturnType<typeof store.getState>;

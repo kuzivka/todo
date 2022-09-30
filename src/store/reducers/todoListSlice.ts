@@ -3,11 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const todoListSlice = createSlice({
   name: 'todoList',
   initialState: {
-    tasks: [],
-    sortBy: 'createdAt',
-    filterBy: 'all',
+    sortBy: 'createdAt' as SortingOption,
+    filterBy: 'all' as TaskToShow,
     searchQuery: '',
-  } as ToDoState,
+  },
   reducers: {
     filterTodo: (state, action) => {
       state.filterBy = action.payload;
@@ -18,17 +17,8 @@ export const todoListSlice = createSlice({
     sortTodo: (state, action) => {
       state.sortBy = action.payload;
     },
-    deleteCompletedTodo: (state) => {
-      const filteredArrayOfTasks = state.tasks.filter((task) => !task.done);
-      state.tasks = filteredArrayOfTasks;
-    },
   },
 });
 
 export default todoListSlice.reducer;
-export const {
-  filterTodo,
-  sortTodo,
-  deleteCompletedTodo,
-  searchTodo,
-} = todoListSlice.actions;
+export const { filterTodo, sortTodo, searchTodo } = todoListSlice.actions;

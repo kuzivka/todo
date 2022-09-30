@@ -2,11 +2,8 @@ import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  filterTodo,
-  deleteCompletedTodo,
-  searchTodo,
-} from '../reducers/todoListSlice';
+import { filterTodo, searchTodo } from '../store/reducers/todoListSlice';
+import { deleteCompletedTodo } from '../store/reducers/todoSlice';
 import { filterListBy } from '../enums';
 import { getFilter } from '../selectors/getFilter';
 import FilterBtn from './FilterBtn';

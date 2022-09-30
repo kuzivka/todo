@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../reducers/todoSlice';
-import { filterTodo, sortTodo } from '../reducers/todoListSlice';
+import { addTodo } from '../store/reducers/todoSlice';
+import { filterTodo, sortTodo } from '../store/reducers/todoListSlice';
 import { filterListBy } from '../enums';
 import { getSortingOption } from '../selectors/getSortingOption';
 import { getNewTaskObject } from '../utils/getNewTaskObject';

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { filterTodo } from '../reducers/todoListSlice';
+import { filterTodo } from '../store/reducers/todoListSlice';
 import { filterListBy } from '../enums';
 
 interface FilterBtnProps {

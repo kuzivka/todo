@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../reducers/todoSlice';
-import { filterTodo } from '../reducers/todoListSlice';
+import { addTodo } from '../store/reducers/todoSlice';
+import { filterTodo } from '../store/reducers/todoListSlice';
 import { filterListBy } from '../enums';
 import { getNewTaskObject } from '../utils/getNewTaskObject';
 import { TaskViewModal } from './TaskViewModal';

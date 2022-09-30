@@ -3,7 +3,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { addDays } from 'date-fns';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { TIME_IN_MODAL } from '../constants';
+import { TIME_IN_MODAL } from './constants';
 
 interface ITaskViewModalProps {
   open: boolean;
@@ -77,7 +77,7 @@ export function TaskViewModal(props: ITaskViewModalProps) {
             onChange={onDatePicking}
           />
         </LocalizationProvider>
-        <Box className="button-box">
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button disabled={!taskValue?.trim()} onClick={handleSave}>
             save
           </Button>
