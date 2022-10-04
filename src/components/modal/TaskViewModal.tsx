@@ -4,6 +4,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { addDays } from 'date-fns';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { TIME_IN_MODAL } from '../constants';
+import { stylesForModal } from '../../styles/styleObjects';
 
 interface ITaskViewModalProps {
   open: boolean;
@@ -11,22 +12,6 @@ interface ITaskViewModalProps {
   onSave: (taskValue: string, expirationDate: number) => void;
   initialTask?: ToDo;
 }
-
-const stylesForModal = {
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  width: '400px',
-  height: '400px',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: '#fff',
-  border: '2px solid #2b2b2b',
-  boxShadow: 24,
-  p: 4,
-};
 
 export function TaskViewModal(props: ITaskViewModalProps) {
   const minDate = new Date();
