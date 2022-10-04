@@ -1,20 +1,19 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteCompletedTodo,
-  filterTodo,
-  searchTodo
-} from '../reducers/reducer';
-import { filterListBy } from '../enums';
-import { getFilter } from '../selectors/getFilter';
+import { filterTodo, searchTodo } from '../../store/reducers/todoListSlice';
+import { deleteCompletedTodo } from '../../store/reducers/todoSlice';
+import { filterListBy } from '../../enums';
+import { getFilter } from '../../selectors/getFilter';
 import FilterBtn from './FilterBtn';
 
 export default function FilterBar() {
   const dispatch = useDispatch();
 
   const filterState = useSelector(getFilter);
+
+  const [searchQueryState, setSearchQueryState] = useState('');
 
   const handleDeleteAllClick = useCallback(() => {
     dispatch(deleteCompletedTodo());
@@ -23,7 +22,9 @@ export default function FilterBar() {
 
   const handleSearchFieldChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      dispatch(searchTodo(event.target.value));
+      const inputValue = event.target.value.replace(/[^\w\s]/gi, '').trim();
+      setSearchQueryState(inputValue);
+      dispatch(searchTodo(inputValue));
     },
     [dispatch]
   );
@@ -33,11 +34,12 @@ export default function FilterBar() {
   return (
     <Box className="filter-buttons-container">
       <TextField
+        value={searchQueryState}
         id="standard-basic"
-        className="search-field"
         placeholder="Search"
         variant="standard"
         onChange={handleSearchFieldChange}
+        sx={{ fontSize: '10px', m: '0px 8px', width: 150 }}
       />
       {buttons.map((button) => (
         <FilterBtn key={button} filterState={filterState} show={button} />

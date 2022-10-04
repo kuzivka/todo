@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { filterTodo } from '../reducers/reducer';
-import { filterListBy } from '../enums';
+import { filterTodo } from '../../store/reducers/todoListSlice';
+import { filterListBy } from '../../enums';
 
 interface FilterBtnProps {
   filterState: string;
@@ -17,7 +17,7 @@ export default function FilterBtn(props: FilterBtnProps) {
   };
   return (
     <Button
-      className={filterState === show ? 'active-button' : ''}
+      sx={filterState === show ? { backgroundColor: '#ddd' } : {}}
       size="small"
       onClick={handleClick}
     >

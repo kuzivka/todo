@@ -3,15 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export const todoSlice = createSlice({
   name: 'todo',
   initialState: {
-    tasks: [],
-    sortBy: 'createdAt',
-    filterBy: 'all',
-    searchQuery: '',
-  } as ToDoState,
+    tasks: [] as ToDo[],
+  },
   reducers: {
     addTodo: (state, action) => {
       state.tasks.push(action.payload);
     },
+
     toggleDone: (state, action) => {
       const taskToUpdate = state.tasks.find(
         (task) => task.id === action.payload
@@ -21,24 +19,21 @@ export const todoSlice = createSlice({
       }
     },
     deleteTodo: (state, action) => {
-      state.tasks.filter((task) => task.id !== action.payload);
+      const newListOfTasks = state.tasks.filter(
+        (task) => task.id !== action.payload
+      );
+      return { ...state, tasks: newListOfTasks };
     },
     editTodo: (state, action) => {
-      let taskToUpdate = state.tasks.find(
-        (task) => task.id === action.payload.id
-      );
-      if (taskToUpdate) {
-        taskToUpdate = action.payload;
-      }
-    },
-    filterTodo: (state, action) => {
-      state.filterBy = action.payload;
-    },
-    searchTodo: (state, action) => {
-      state.searchQuery = action.payload;
-    },
-    sortTodo: (state, action) => {
-      state.sortBy = action.payload;
+      const updatedTasks = state.tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return (task = action.payload);
+        } else {
+          return task;
+        }
+      });
+      const newState = { ...state, tasks: updatedTasks };
+      return newState;
     },
     deleteCompletedTodo: (state) => {
       const filteredArrayOfTasks = state.tasks.filter((task) => !task.done);
@@ -53,8 +48,5 @@ export const {
   toggleDone,
   deleteTodo,
   editTodo,
-  filterTodo,
-  sortTodo,
   deleteCompletedTodo,
-  searchTodo,
 } = todoSlice.actions;

@@ -1,0 +1,15 @@
+export const stylesForModal = {
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  width: '400px',
+  height: '400px',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: '#fff',
+  border: '2px solid #2b2b2b',
+  boxShadow: 24,
+  p: 4,
+};
