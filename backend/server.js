@@ -2,9 +2,18 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 
 dotenv.config();
 const app = express();
+
+mongoose
+  .connect(
+    'mongodb+srv://angelina:<angelina>@cluster0.5r8udvw.mongodb.net/?retryWrites=true&w=majority'
+  )
+  .then(() => {
+    console.log('DB is conected');
+  });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
